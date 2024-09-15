@@ -154,8 +154,8 @@ ask_update_flake() {
                 temp_file=$(mktemp)  # Create a temporary file
                 update_flake > "$temp_file" 2>&1  # Redirect the flake update output to the temp file
 
-                # Optionally filter out unwanted [INFO] lines
-                awk '!/\[INFO\]/ {print}' "$temp_file" > filtered_temp_file
+                # Filter out lines containing "[INFO]" and carriage return characters "^M"
+                awk '!/\[INFO\]/ && !/\r/ {print}' "$temp_file" > filtered_temp_file
 
                 if [[ -s filtered_temp_file ]]; then  # Check if filtered temp file is not empty
                     less -R filtered_temp_file  # Use less to display the output

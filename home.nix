@@ -73,6 +73,7 @@
          t = "txr";
          lzg = "lazygit";
          lzd = "lazydocker";
+         upd = "bash update";
          };
      };  
      carapace.enable = true;

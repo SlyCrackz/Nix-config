@@ -144,12 +144,12 @@
     # Use your own sway config file
     xdg.configFile."sway/config".source = pkgs.lib.mkOverride 0 (builtins.toPath ./sway/config);
     xdg.userDirs = {
-      desktop = "$HOME/desktop";
-      download = "$HOME/downloads";
-      documents = "$HOME/documents";
-      music = "$HOME/music";
-      pictures = "$HOME/pictures";
-      videos = "$HOME/videos";
+      desktop = "/home/crackz/desktop";
+      download = "/home/crackz/downloads";
+      documents = "/home/crackz/documents";
+      music = "/home/crackz/music";
+      pictures = "/home/crackz/pictures";
+      videos = "/home/crackz/videos";
     };
 
 

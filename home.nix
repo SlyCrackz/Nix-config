@@ -70,6 +70,8 @@
          v = "nvim";
          ff = "fastfetch";
          t = "txr";
+         lzg = "lazygit";
+         lzd = "lazydocker";
          };
      };  
      carapace.enable = true;

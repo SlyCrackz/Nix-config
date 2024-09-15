@@ -28,6 +28,7 @@
       pkgs.cmatrix
       pkgs.appimage-run
       pkgs.unzip
+      pkgs.obs-studio
     ];
     programs.bash.enable = true;
   };

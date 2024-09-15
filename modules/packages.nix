@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, inputs, ... }:
 
 {
   environment.systemPackages = with pkgs; [
@@ -9,7 +9,7 @@
     pass
     gnupg
     mangohud
-    neovim
+    inputs.unstablenixpkgs.legacyPackages.${pkgs.system}.neovim
     libnotify
     pulseaudio
     tree

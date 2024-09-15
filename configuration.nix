@@ -100,6 +100,7 @@
     neovim
     libnotify
     pulseaudio
+    tree
   ];
 
   # GnuPG

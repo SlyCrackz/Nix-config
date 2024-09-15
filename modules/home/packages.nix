@@ -1,7 +1,6 @@
 { config, pkgs, lib, ... }:
 
 {
-  home-manager.users.crackz = {
     home.packages = [
       pkgs.firefox
       pkgs.autotiling-rs
@@ -32,5 +31,4 @@
       pkgs.jetbrains.idea-community-bin
     ];
     programs.bash.enable = true;
-  };
 }

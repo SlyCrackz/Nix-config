@@ -1,7 +1,6 @@
 { config, pkgs, lib, ... }:
 
 {
-  home-manager.users.crackz = {
     programs = {
       nushell = { 
         enable = true;
@@ -58,5 +57,4 @@
          };
        };
     };
-  };
 }

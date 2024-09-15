@@ -1,7 +1,6 @@
 { config, pkgs, lib, ... }:
 
 {
-  home-manager.users.crackz = {
     wayland.windowManager.sway = {
       enable = true;
       # Keep other options like environment and extra commands
@@ -16,5 +15,4 @@
       # Any other extra options you might want
       extraOptions = [ "--unsupported-gpu" ];
     };
-  };
 }

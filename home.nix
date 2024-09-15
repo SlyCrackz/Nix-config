@@ -8,7 +8,6 @@
     ./modules/home/packages.nix
     ./modules/home/terminal.nix
   ];
-  home-manager.users.crackz = {
     home.username = "crackz";
     home.homeDirectory = "/home/crackz";
     home.sessionPath = [
@@ -65,6 +64,5 @@
 
    home.stateVersion = "24.05";
    programs.home-manager.enable = true;
-  };
 }
 

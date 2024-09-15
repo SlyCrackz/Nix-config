@@ -1,7 +1,6 @@
 { config, pkgs, lib, ... }:
 
 {
-  home-manager.users.crackz = {
     programs.foot = {
       enable = true;
       settings = {
@@ -39,5 +38,4 @@
         };
       };
     };
-  };
 }

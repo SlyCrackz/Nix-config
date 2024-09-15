@@ -4,6 +4,10 @@
   imports = [
     ./hardware-configuration.nix
     ./home.nix
+    ./modules/boot.nix
+    ./modules/network.nix
+    ./modules/programs.nix
+    ./modules/services.nix
   ];
 
   nix.nixPath = [
@@ -19,62 +23,13 @@
   "L /var/lib/tailscale - - - - /persist/var/lib/tailscale"
   ];
 
-  services.tailscale.useRoutingFeatures = "client";
-
   # Allow flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   
-  # Video drivers for Xorg and Wayland
-  services.xserver.videoDrivers = [ "intel" "nvidia" ];
-
-  # System bootloader and kernel parameters
-  boot.supportedFilesystems = [ "zfs" ];
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelParams = [ "elevator=none" ];
-
-  # ZFS configuration
-  boot.initrd.postDeviceCommands = lib.mkAfter ''
-    zpool import rpool
-    zfs rollback -r rpool/encrypted/local/root@blank
-  '';
-
-  services.zfs = {
-    autoScrub.enable = true;
-    autoSnapshot.enable = true;
-  };
-
-  programs.dconf.enable = true;
-
-  # Networking
-  networking.hostId = "69413b8c";
-  networking.hostName = "nixbox";
-
-  # SSH configuration
-  services.openssh = {
-    enable = true;
-    settings.PermitRootLogin = "no";
-    settings.PasswordAuthentication = false;
-    hostKeys = [
-      { path = "/persist/etc/ssh/ssh_host_ed25519_key"; type = "ed25519"; }
-      { path = "/persist/etc/ssh/ssh_host_rsa_key"; type = "rsa"; bits = 4096; }
-    ];
-  };
-
   # Other system services
-  services.tailscale.enable = true;
   security.rtkit.enable = true;
   security.polkit.enable = true;
   security.sudo.wheelNeedsPassword = false;
-
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-  };
 
   sound.mediaKeys.enable = true;
 
@@ -89,43 +44,12 @@
   #emoji = [ "Noto Color Emoji" ];
   #};
 
-  environment.systemPackages = with pkgs; [
-    fastfetch
-    lf
-    pavucontrol
-    btop
-    pass
-    gnupg
-    mangohud
-    neovim
-    libnotify
-    pulseaudio
-    tree
-  ];
-
-  # GnuPG
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
-  services.pcscd.enable = true;
-
-  programs.steam.enable = true;
-  programs.steam.gamescopeSession.enable = true;
-  programs.gamemode.enable = true;
-
   environment.variables.EDITOR = "nvim";  
   # Neovim settings
 #  programs.neovim = {
 #    enable = true;
 #    defaultEditor = true;
 #  };
-
-  programs.nix-ld.enable = true;
-  #programs.nix-ld.libraries = with pkgs; [
-    # Add any missing dynamic libraries for unpackaged programs
-    # here, NOT in environment.systemPackages
-  #];
 
   # User configuration
   users = {

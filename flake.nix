@@ -1,17 +1,14 @@
 {
-  description = "Home Manager and NixOS configuration of crackz with unstable packages";
+  description = "NixOS configuration of crackz with unstable packages";
 
   inputs = {
-    # Define both stable and unstable nixpkgs
-    unstablenixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    # Stable Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.05";
-    home-manager = {
-      url = "github:nix-community/home-manager?ref=release-24.05";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # Unstable Nixpkgs for cutting-edge packages
+    unstablenixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
   };
 
-  outputs = { unstablenixpkgs, nixpkgs, home-manager, ... } @ inputs:
+  outputs = { nixpkgs, unstablenixpkgs, ... } @ inputs:
     let
       # Define both stable and unstable packages
       unstablepkgs = unstablenixpkgs.legacyPackages.x86_64-linux;
@@ -24,15 +21,6 @@
           ./configuration.nix  # Your NixOS configuration file
         ];
         specialArgs = { inherit inputs; };
-      };
-
-      # Home Manager configuration
-      homeConfigurations."crackz" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-
-        # Specify your home configuration modules here
-        modules = [ ./home.nix ];
-
       };
     };
 }

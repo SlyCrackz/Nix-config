@@ -1,9 +1,19 @@
 #!/bin/bash
 
 # Make log of update
-exec > >(tee "$HOME/latest-update.log") 2>&1
+# Define the directory where logs will be stored
+LOG_DIR="$HOME/documents/nixos-update-logs"
 
-# Log status message
+# Create the log directory if it doesn't exist
+mkdir -p "$LOG_DIR"
+
+# Generate a log file name based on the current date and time
+LOG_FILE="$LOG_DIR/$(date +"%Y-%m-%d_%H-%M-%S").log"
+
+# Make log of the update and store it in the log file
+exec > >(tee "$LOG_FILE") 2>&1
+
+log_action "Running NixOS Update Script - $(date +"%Y-%m-%d %H:%M:%S")"# Log status message
 log() {
     echo -e "\e[32m[INFO]\e[0m $1"
 }
@@ -90,7 +100,7 @@ complete_clean() {
             sudo nix-store --gc || log_error "Failed to clean up unused dependencies."
             sudo nix-env --delete-generations || log_error "Failed to remove orphaned packages."
             log "Complete clean finished."
-            log "***It's a good idea to rebuild the system after a complete clean to clear old boot entries and make sure you nothing went wrong!***"
+            log "***It's a good idea to rebuild the system after a complete clean to clear old boot entries and to make sure nothing went wrong!***"
             return 0
         else
             log "Skipping complete clean."
@@ -154,7 +164,7 @@ ask_cleanup() {
 # Ask the user if they want to update the flake
 ask_update_flake() {
     while true; do
-        log_action "Do you want to update the flake before rebuilding? (y/n) "
+        log_action "Do you want to update the flake? (y/n) "
         read -r answer
         case $answer in
             [Yy]* )
@@ -199,7 +209,7 @@ ask_rebuild_after_clean() {
 }
 
 # Change to the working directory
-log "Changing to /persist/etc/nixos/..."
+log "Running NixOS Update Script - $(date)"
 cd /persist/etc/nixos/ || log_error "Failed to change directory to /persist/etc/nixos/"
 
 # Run txr and lazygit

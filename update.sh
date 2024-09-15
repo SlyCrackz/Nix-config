@@ -13,7 +13,6 @@ LOG_FILE="$LOG_DIR/$(date +"%Y-%m-%d_%H-%M-%S").log"
 # Make log of the update and store it in the log file
 exec > >(tee "$LOG_FILE") 2>&1
 
-log_action "Running NixOS Update Script - $(date +"%Y-%m-%d %H:%M:%S")"# Log status message
 log() {
     echo -e "\e[32m[INFO]\e[0m $1"
 }
@@ -50,16 +49,39 @@ run_lazygit() {
 }
 
 # Function to perform nixos-rebuild with flake
-run_nixos_rebuild() {
+run_nixos_switch() {
     check_command "nixos-rebuild"
     log "Running nixos-rebuild..."
-    sudo nixos-rebuild switch --flake .#nixbox || log_error "nixos-rebuild failed."
+    cd /persist/etc/nixos || { log_error "Failed to change directory to /persist/etc/nixos"; return 1; }  # Stop on failure
+    sudo nixos-rebuild switch --flake ".#nixbox" || { log_error "nixos-rebuild failed."; return 1; }  # Stop on failure
+    log "NixOS switch completed successfully."
+}
+
+# Function to run home-manager switch
+run_home_manager_switch() {
+    check_command "home-manager"
+    log "Running home-manager switch..."
+    cd ~/.config/home-manager || { log_error "Failed to change directory to ~/.config/home-manager"; return 1; }  # Stop on failure
+    home-manager switch --flake ".#crackz" || { log_error "home-manager switch failed."; return 1; }  # Stop on failure
+    log "Home-manager switch completed successfully."
 }
 
 # Function to dry run nixos-rebuild with flake
-review_flake_diff() {
-    log "Performing flake-based dry run for nixos-rebuild..."
-    sudo nixos-rebuild dry-run --flake .#nixbox || log_error "Failed to perform flake-based dry run."
+nixos_dry_run() {
+    log "Performing flake-based dry run for nixos..."
+    cd /persist/etc/nixos || log_error "Failed to change directory to /persist/etc/nixos"
+    sudo nixos-rebuild dry-run --flake ".#nixbox" || log_error "Failed to perform flake-based dry run."
+}
+
+# Function to dry run home-manager with flake
+home_manager_dry_run() {
+    log "Performing flake-based dry run for home-manager..."
+    cd ~/.config/home-manager || { log_error "Failed to change directory to ~/.config/home-manager"; return 1; }  # Stop on failure
+    home-manager build --dry-run --flake ".#crackz" --extra-experimental-features "nix-command flakes" || {
+        log_error "Failed to perform flake-based dry run for home-manager."
+        return 1  # Stop if dry run fails
+    }
+    log "Dry run for home-manager completed successfully."
 }
 
 # Function to clean old generations and garbage collection, including removing orphaned packages
@@ -109,35 +131,93 @@ complete_clean() {
     done
 }
 
-# Ask the user if they want to do a dry run
-ask_dry_run() {
+# Ask the user if they want to run system switch
+ask_nixos_switch() {
     while true; do
-        log_action "Do you want to perform a dry run first? (y/n) "
+        log_action "Do you want to switch your NixOS configuration? (y/n) "
         read -r answer
         case $answer in
             [Yy]* )
-                log "Running dry run..."
-                
-                sleep 1  # Add a small delay to avoid missing initial output
+                log_action "Do you want to perform a dry run first? (y/n)"
+                read -r dry_run_answer
+                if [[ "$dry_run_answer" =~ [Yy]* ]]; then
+                    if ! nixos_dry_run; then
+                        log_error "Dry run failed. Exiting."
+                        return 1  # Exit if dry run fails
+                    fi
 
-                # Run the dry run command and print output directly to the terminal
-                if review_flake_diff; then
-                    log "Dry run completed successfully."
+                    # Ask for confirmation after the dry run completes
+                    log_action "Dry run completed. Do you want to proceed with the actual NixOS switch? (y/n)"
+                    read -r proceed_answer
+                    if [[ "$proceed_answer" =~ [Yy]* ]]; then
+                        run_nixos_switch  # Now actually proceed with the switch
+                    else
+                        log "Skipping NixOS switch after dry run."
+                    fi
+                    return 0  # Exit the function after processing the decision
                 else
-                    log_error "Dry run failed with exit code $?."
-                    return 1  # Exit the function and continue script flow
+                    run_nixos_switch  # No dry run, proceed with the actual switch
                 fi
-                return 0  # Gracefully exit function and continue the main script
+                break
                 ;;
             [Nn]* )
-                log "Skipping dry run."
-                return 0  # Gracefully exit and continue to the next step in the script
+                log "Skipping NixOS switch."
+                break
                 ;;
             * )
                 log "Please answer y or n."
                 ;;
         esac
     done
+}
+
+# Ask the user if they want to switch home-manager configuration
+ask_switch_home_manager() {
+    while true; do
+        log_action "Do you want to switch your home-manager configuration? (y/n) "
+        read -r answer
+        case $answer in
+            [Yy]* )
+                log_action "Do you want to perform a dry run first? (y/n)"
+                read -r dry_run_answer
+                if [[ "$dry_run_answer" =~ [Yy]* ]]; then
+                    if ! home_manager_dry_run; then
+                        log_error "Dry run for home-manager failed. Exiting."
+                        return 1  # Exit if dry run fails
+                    fi
+
+                    # Ask for confirmation after the dry run completes
+                    log_action "Dry run completed. Do you want to proceed with the actual home-manager switch? (y/n)"
+                    read -r proceed_answer
+                    if [[ "$proceed_answer" =~ [Yy]* ]]; then
+                        run_home_manager_switch  # Proceed with the actual switch
+                    else
+                        log "Skipping home-manager switch after dry run."
+                    fi
+                    return 0  # Exit the function after processing the decision
+                else
+                    run_home_manager_switch  # No dry run, proceed with the actual switch
+                fi
+                break
+                ;;
+            [Nn]* )
+                log "Skipping home-manager switch."
+                break
+                ;;
+            * )
+                log "Please answer y or n."
+                ;;
+        esac
+    done
+}
+
+# Combined logic to ask for home-manager switch, then nixos if skipped
+ask_switches() {
+    if ask_switch_home_manager; then
+        log "Home-manager switch complete. Skipping nixos switch."
+    else
+        ask_nixos_switch
+    fi
 }
 
 # Ask about cleaning up the system and removing orphaned packages
@@ -209,8 +289,7 @@ ask_rebuild_after_clean() {
 }
 
 # Change to the working directory
-log "Running NixOS Update Script - $(date)"
-cd /persist/etc/nixos/ || log_error "Failed to change directory to /persist/etc/nixos/"
+log "Running NixOS Update Script - $(date +"%Y-%m-%d %H:%M:%S")"# Log status message
 
 # Run txr and lazygit
 run_txr
@@ -222,27 +301,8 @@ check_disk_space
 # Ask the user if they want to update the flake
 ask_update_flake 
 
-# Ask if the user wants a dry run first
-ask_dry_run
-
-# Ask the user if they want to run nixos-rebuild
-while true; do
-    log_action "Do you want to switch with nixos-rebuild? (y/n) "
-    read -r answer
-    case $answer in
-        [Yy]* )
-            run_nixos_rebuild
-            break
-            ;;
-        [Nn]* )
-            log "Skipping nixos-rebuild."
-            break
-            ;;
-        * )
-            log "Please answer y or n."
-            ;;
-    esac
-done
+# Ask the user if they want to switch either home-manager or nixos configurations
+ask_switches
 
 # Ask if the user wants to clean up the system and remove orphaned packages
 ask_cleanup

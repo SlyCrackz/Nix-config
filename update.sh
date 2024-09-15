@@ -100,7 +100,18 @@ ask_dry_run() {
         read -p "Do you want to perform a dry run first? (y/n) " answer
         case $answer in
             [Yy]* )
-                review_flake_diff
+                temp_file=$(mktemp)  # Create a temporary file
+                review_flake_diff > "$temp_file" 2>&1  # Redirect output to the temp file
+
+                # Filter out lines containing "[INFO]", "building the system configuration...", "^M", and "~"
+                awk '!/\[INFO\]/ && !/building the system configuration.../ && !/\r/ && !/^~$/ {print}' "$temp_file" > filtered_temp_file
+
+                if [[ -s filtered_temp_file ]]; then  # Check if filtered temp file is not empty
+                    less -R filtered_temp_file  # Use less to display if output exists
+                else
+                    echo "No relevant output from dry run."
+                fi
+                rm "$temp_file" filtered_temp_file  # Clean up temporary files
                 break
                 ;;
             [Nn]* )
@@ -140,7 +151,19 @@ ask_update_flake() {
         read -p "Do you want to update the flake before rebuilding? (y/n) " answer
         case $answer in
             [Yy]* )
-                update_flake
+                temp_file=$(mktemp)  # Create a temporary file
+                update_flake > "$temp_file" 2>&1  # Redirect the flake update output to the temp file
+
+                # Optionally filter out unwanted [INFO] lines
+                awk '!/\[INFO\]/ {print}' "$temp_file" > filtered_temp_file
+
+                if [[ -s filtered_temp_file ]]; then  # Check if filtered temp file is not empty
+                    less -R filtered_temp_file  # Use less to display the output
+                else
+                    echo "No relevant output from flake update."
+                fi
+
+                rm "$temp_file" filtered_temp_file  # Clean up temporary files
                 break
                 ;;
             [Nn]* )
@@ -178,15 +201,15 @@ ask_rebuild_after_clean() {
 log "Changing to /persist/etc/nixos/..."
 cd /persist/etc/nixos/ || log_error "Failed to change directory to /persist/etc/nixos/"
 
+# Ask the user if they want to update the flake
+ask_update_flake 
+
 # Run txr and lazygit
 run_txr
 run_lazygit
 
 # Check disk space after lazygit is closed
 check_disk_space
-
-# Ask the user if they want to update the flake
-ask_update_flake
 
 # Ask if the user wants a dry run first
 ask_dry_run

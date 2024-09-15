@@ -185,11 +185,11 @@ run_lazygit
 # Check disk space after lazygit is closed
 check_disk_space
 
-# Ask if the user wants a dry run first
-ask_dry_run
-
 # Ask the user if they want to update the flake
 ask_update_flake
+
+# Ask if the user wants a dry run first
+ask_dry_run
 
 # Ask the user if they want to run nixos-rebuild
 while true; do
@@ -217,4 +217,3 @@ if complete_clean; then
     # If the user did the complete clean, ask if they want to rebuild the system
     ask_rebuild_after_clean
 fi
-

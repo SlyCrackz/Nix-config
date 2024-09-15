@@ -13,6 +13,7 @@
     libnotify
     pulseaudio
     tree
+    home-manager
   ];
  
   programs.dconf.enable = true;

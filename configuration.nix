@@ -19,6 +19,7 @@
   "L /var/lib/tailscale - - - - /persist/var/lib/tailscale"
   ];
 
+  services.tailscale.useRoutingFeatures = "client"
 
   # Allow flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

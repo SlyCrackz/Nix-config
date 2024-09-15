@@ -38,7 +38,7 @@ exec autotiling-rs
 exec mako
 
 # Wallpaper
-output * bg /home/crackz/pictures/gruv-understand.png fill
+output * bg /home/crackz/media/pictures/gruv-understand.png fill
 
 ### Variables
 set $mod Mod4

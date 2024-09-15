@@ -1,34 +1,39 @@
 {
-  description = "Nixbox Flake";
+  description = "Home Manager and NixOS configuration of crackz with unstable packages";
 
   inputs = {
+    # Define both stable and unstable nixpkgs
     unstablenixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.05";
-    home-manager.url = "github:nix-community/home-manager?ref=release-24.05";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manager?ref=release-24.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { unstablenixpkgs, nixpkgs, home-manager, ... } @ inputs:
-  let
-    unstablepkgs = unstablenixpkgs.legacyPackages.x86_64-linux;
-    pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
-  in 
-  {
-   #packages.x86_64-linux = {
-   #   # Use Neovim from the nixpkgs unstable input
-   #   neovim-unstable = unstablepkgs.neovim;
+    let
+      # Define both stable and unstable packages
+      unstablepkgs = unstablenixpkgs.legacyPackages.x86_64-linux;
+      pkgs = nixpkgs.legacyPackages.x86_64-linux;
+    in {
+      # NixOS system configuration
+      nixosConfigurations.nixbox = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./configuration.nix  # Your NixOS configuration file
+        ];
+        specialArgs = { inherit inputs; };
+      };
 
-   #   # Default package for this flake (can be any package)
-   #   default = unstablepkgs.neovim;
-   # };
+      # Home Manager configuration
+      homeConfigurations."crackz" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
 
-    nixosConfigurations.nixbox = nixpkgs.lib.nixosSystem {
-      specialArgs = { inherit inputs; };
-      modules = [
-        ./configuration.nix
-        home-manager.nixosModules.home-manager
-      ];
+        # Specify your home configuration modules here
+        modules = [ ./home.nix ];
+
+      };
     };
-  };
 }
 

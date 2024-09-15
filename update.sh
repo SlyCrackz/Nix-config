@@ -45,6 +45,7 @@ run_txr() {
 run_lazygit() {
     check_command "lazygit"
     log "Running lazygit..."
+    cd "$HOME/repos/NixOS-config/" || { log_error "Failed to change directory to $HOME/repos/NixOS-config/"; return 1; } 
     lazygit || log_error "lazygit command failed."
 }
 
@@ -101,6 +102,7 @@ remove_orphaned_packages() {
 # Function to update flake
 update_flake() {
     log "Updating flake.lock..."
+    cd "$HOME/repos/NixOS-config/nixos/" || log_error "Failed to change directory to $HOME/repos/NixOS-config/nixos/"
     nix flake update || log_error "Failed to update flake.lock."
 }
 
@@ -201,7 +203,6 @@ ask_switch_home_manager() {
                 break
                 ;;
             [Nn]* )
-                log "Skipping home-manager switch."
                 break
                 ;;
             * )
@@ -214,11 +215,11 @@ ask_switch_home_manager() {
 # Combined logic to ask for home-manager switch, then nixos if skipped
 ask_switches() {
     if ask_switch_home_manager; then
-        log "Home-manager switch complete. Skipping nixos switch."
-    else
-        ask_nixos_switch
+        log "Skipping home-manager switch..."
     fi
+    ask_nixos_switch
 }
+
 
 # Ask about cleaning up the system and removing orphaned packages
 ask_cleanup() {

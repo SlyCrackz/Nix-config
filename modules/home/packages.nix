@@ -29,6 +29,7 @@
       pkgs.appimage-run
       pkgs.unzip
       pkgs.obs-studio
+      pkgs.jetbrains.idea-community
     ];
     programs.bash.enable = true;
   };

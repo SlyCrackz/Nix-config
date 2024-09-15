@@ -42,7 +42,7 @@
     };
 
     # Use your own sway config file
-    xdg.configFile."sway/config".source = pkgs.lib.mkOverride 0 (builtins.toPath ./sway/config);
+    xdg.configFile."sway/config".source = pkgs.lib.mkOverride 0 (builtins.toPath ./modules/sway/config);
     
     xdg.userDirs = {
       desktop = "/home/crackz/desktop";

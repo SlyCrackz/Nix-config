@@ -1,17 +1,21 @@
 #!/bin/bash
 
-# Exit on error
-set -e
+# Make log of update
+exec > >(tee "$HOME/latest-update.log") 2>&1
 
 # Log status message
 log() {
     echo -e "\e[32m[INFO]\e[0m $1"
 }
 
+# Log prompt message
+log_action() {
+    echo -e "\e[34m[PROMPT]\e[0m $1"  # Blue color for prompts
+}
+
 # Log error message and exit
 log_error() {
     echo -e "\e[31m[ERROR]\e[0m $1"
-    exit 1
 }
 
 # Function to check if a command exists
@@ -78,7 +82,8 @@ check_disk_space() {
 # Function to ask for a complete clean
 complete_clean() {
     while true; do
-        read -p "Do you want to do a COMPLETE clean of old generatiions, performance gabage collection, and remove all orphaned packages? (YES/n) " answer
+        log_action "Do you want to do a COMPLETE clean of old generatiions, performance gabage collection, and remove all orphaned packages? (YES/n) "
+        read -r answer
         if [ "$answer" == "YES" ]; then
             log "Performing complete clean of all old generations and unused files..."
             sudo nix-collect-garbage -d || log_error "Failed to perform complete clean."
@@ -97,29 +102,43 @@ complete_clean() {
 # Ask about dry run
 ask_dry_run() {
     while true; do
-        read -p "Do you want to perform a dry run first? (y/n) " answer
+        log_action "Do you want to perform a dry run first? (y/n) "
+        read -r answer
         case $answer in
             [Yy]* )
                 temp_file=$(mktemp)  # Create a temporary file
-                review_flake_diff > "$temp_file" 2>&1  # Redirect output to the temp file
+                log "Running dry run and capturing all output..."
 
-                # Filter out lines containing "[INFO]", "building the system configuration...", "^M", and "~"
-                awk '!/\[INFO\]/ && !/building the system configuration.../ && !/\r/ && !/^~$/ {print}' "$temp_file" > filtered_temp_file
+                # Run the dry run command and capture all output directly to the temp file
+                if review_flake_diff > "$temp_file" 2>&1; then
+                    log "Dry run completed successfully."
+                else
+                    log_error "Dry run failed with exit code $?."
+                    cat "$temp_file"  # Output what was captured in case of failure
+                    rm "$temp_file"
+                    return 1  # Exit the function and continue script flow
+                fi
+
+                # Filter out unwanted lines, such as progress bars and "building the system configuration..."
+                awk '!/\[INFO\]/ && !/building the system configuration.../ && !/\r/ {print}' "$temp_file" | grep -vE '^Downloading|^Fetched|^Resolving' > filtered_temp_file
 
                 if [[ -s filtered_temp_file ]]; then  # Check if filtered temp file is not empty
-                    less -R filtered_temp_file  # Use less to display if output exists
+                    log "Displaying filtered output..."
+                    less -R filtered_temp_file  # Use less to display the filtered output
                 else
-                    echo "No relevant output from dry run."
+                    log "No relevant output from dry run."
                 fi
+
+                # Clean up temporary files
                 rm "$temp_file" filtered_temp_file  # Clean up temporary files
-                break
+                return 0  # Gracefully exit function and continue the main script
                 ;;
             [Nn]* )
                 log "Skipping dry run."
-                break
+                return 0  # Gracefully exit and continue to the next step in the script
                 ;;
             * )
-                echo "Please answer y or n."
+                log "Please answer y or n."
                 ;;
         esac
     done
@@ -128,7 +147,8 @@ ask_dry_run() {
 # Ask about cleaning up the system and removing orphaned packages
 ask_cleanup() {
     while true; do
-        read -p "Do you want to clean old generations, perform garbage collection, and remove orphaned packages? (y/n) " answer
+        log_action "Do you want to clean old generations, perform garbage collection, and remove orphaned packages? (y/n) "
+        read -r answer
         case $answer in
             [Yy]* )
                 cleanup_system
@@ -139,7 +159,7 @@ ask_cleanup() {
                 break
                 ;;
             * )
-                echo "Please answer y or n."
+                log "Please answer y or n."
                 ;;
         esac
     done
@@ -148,22 +168,28 @@ ask_cleanup() {
 # Ask about updating the flake
 ask_update_flake() {
     while true; do
-        read -p "Do you want to update the flake before rebuilding? (y/n) " answer
+        log_action "Do you want to update the flake before rebuilding? (y/n) "
+        read -r answer
         case $answer in
             [Yy]* )
                 temp_file=$(mktemp)  # Create a temporary file
-                update_flake > "$temp_file" 2>&1  # Redirect the flake update output to the temp file
+                log "Updating flake and capturing all output..."
 
-                # Filter out lines containing "[INFO]" and carriage return characters "^M"
-                awk '!/\[INFO\]/ && !/\r/ {print}' "$temp_file" > filtered_temp_file
+                # Run the update flake command and capture all output directly to the temp file
+                update_flake > "$temp_file" 2>&1  # Redirect output to temp_file
+
+                # Filter out unwanted lines, such as progress bars or carriage returns "^M"
+                awk '!/\[INFO\]/ && !/\r/ {print}' "$temp_file" | grep -vE '^Downloading|^Fetched|^Resolving' > filtered_temp_file
 
                 if [[ -s filtered_temp_file ]]; then  # Check if filtered temp file is not empty
-                    less -R filtered_temp_file  # Use less to display the output
+                    log "Displaying filtered output..."
+                    less -R filtered_temp_file  # Use less to display the filtered output
                 else
-                    echo "No relevant output from flake update."
+                    log "No relevant output from flake update."
                 fi
 
-                rm "$temp_file" filtered_temp_file  # Clean up temporary files
+                # Clean up temporary files
+                rm "$temp_file" filtered_temp_file
                 break
                 ;;
             [Nn]* )
@@ -171,7 +197,7 @@ ask_update_flake() {
                 break
                 ;;
             * )
-                echo "Please answer y or n."
+                log "Please answer y or n."
                 ;;
         esac
     done
@@ -180,7 +206,8 @@ ask_update_flake() {
 # Ask the user if they want to rebuild after a complete clean
 ask_rebuild_after_clean() {
     while true; do
-        read -p "Do you want to rebuild the system after the complete clean? (y/n) " answer
+        log_action "Do you want to rebuild the system after the complete clean? (y/n) "
+        read -r answer
         case $answer in
             [Yy]* )
                 run_nixos_rebuild
@@ -191,7 +218,7 @@ ask_rebuild_after_clean() {
                 break
                 ;;
             * )
-                echo "Please answer y or n."
+                log "Please answer y or n."
                 ;;
         esac
     done
@@ -216,7 +243,8 @@ ask_dry_run
 
 # Ask the user if they want to run nixos-rebuild
 while true; do
-    read -p "Do you want to switch with nixos-rebuild? (y/n) " answer
+    log_action "Do you want to switch with nixos-rebuild? (y/n) "
+    read -r answer
     case $answer in
         [Yy]* )
             run_nixos_rebuild
@@ -227,7 +255,7 @@ while true; do
             break
             ;;
         * )
-            echo "Please answer y or n."
+            log "Please answer y or n."
             ;;
     esac
 done
@@ -241,4 +269,4 @@ if complete_clean; then
     ask_rebuild_after_clean
 fi
 
-echo "*** REMEMBER THIS SCRIPT IS SYMLINKED MANUALLY, ONCE YOU MOVE THE SYMLINK TO NIXOS CONFIG YOU CAN REMOVE THIS ***"
+log "*** REMEMBER THIS SCRIPT IS SYMLINKED MANUALLY, ONCE YOU MOVE THE SYMLINK TO NIXOS CONFIG YOU CAN REMOVE THIS ***"

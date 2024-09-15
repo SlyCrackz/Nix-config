@@ -78,7 +78,7 @@ check_disk_space() {
 # Function to ask for a complete clean
 complete_clean() {
     while true; do
-        read -p "Do you want to do a complete clean of old generatiions, performance gabage collection, and remove all orphaned packages? (YES/n) " answer
+        read -p "Do you want to do a COMPLETE clean of old generatiions, performance gabage collection, and remove all orphaned packages? (YES/n) " answer
         if [ "$answer" == "YES" ]; then
             log "Performing complete clean of all old generations and unused files..."
             sudo nix-collect-garbage -d || log_error "Failed to perform complete clean."
@@ -217,3 +217,5 @@ if complete_clean; then
     # If the user did the complete clean, ask if they want to rebuild the system
     ask_rebuild_after_clean
 fi
+
+echo "*** REMEMBER THIS SCRIPT IS SYMLINKED MANUALLY, ONCE YOU MOVE THE SYMLINK TO NIXOS CONFIG YOU CAN REMOVE THIS ***"

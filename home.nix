@@ -4,6 +4,9 @@
   home-manager.users.crackz = {
     home.username = "crackz";
     home.homeDirectory = "/home/crackz";
+    home.sessionPath = [
+    "/home/crackz/.local/bin/"
+    ];
     home.packages = [
       pkgs.firefox
       pkgs.autotiling-rs
@@ -66,6 +69,7 @@
          shellAliases = {
          v = "nvim";
          ff = "fastfetch";
+         t = "txr";
          };
      };  
      carapace.enable = true;

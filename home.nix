@@ -41,6 +41,8 @@
       size = 16;
     };
 
+    xdg.enable = true;
+
     # Use your own sway config file
     xdg.configFile."sway/config".source = pkgs.lib.mkOverride 0 (builtins.toPath ./modules/sway/config);
     

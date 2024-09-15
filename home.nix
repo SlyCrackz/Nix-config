@@ -158,7 +158,6 @@
         #term = "xterm-256color";
         font = "IntoneMono Nerd Font:size=11";
         dpi-aware = "yes";
-        shell = "${pkgs.nushell}/bin/nu";  # Path to Nushell binary
       };
 
       colors = {

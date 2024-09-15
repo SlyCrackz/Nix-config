@@ -99,38 +99,24 @@ complete_clean() {
     done
 }
 
-# Ask about dry run
+# Ask the user if they want to do a dry run
 ask_dry_run() {
     while true; do
         log_action "Do you want to perform a dry run first? (y/n) "
         read -r answer
         case $answer in
             [Yy]* )
-                temp_file=$(mktemp)  # Create a temporary file
-                log "Running dry run and capturing all output..."
+                log "Running dry run..."
+                
+                sleep 1  # Add a small delay to avoid missing initial output
 
-                # Run the dry run command and capture all output directly to the temp file
-                if review_flake_diff > "$temp_file" 2>&1; then
+                # Run the dry run command and print output directly to the terminal
+                if review_flake_diff; then
                     log "Dry run completed successfully."
                 else
                     log_error "Dry run failed with exit code $?."
-                    cat "$temp_file"  # Output what was captured in case of failure
-                    rm "$temp_file"
                     return 1  # Exit the function and continue script flow
                 fi
-
-                # Filter out unwanted lines, such as progress bars and "building the system configuration..."
-                awk '!/\[INFO\]/ && !/building the system configuration.../ && !/\r/ {print}' "$temp_file" | grep -vE '^Downloading|^Fetched|^Resolving' > filtered_temp_file
-
-                if [[ -s filtered_temp_file ]]; then  # Check if filtered temp file is not empty
-                    log "Displaying filtered output..."
-                    less -R filtered_temp_file  # Use less to display the filtered output
-                else
-                    log "No relevant output from dry run."
-                fi
-
-                # Clean up temporary files
-                rm "$temp_file" filtered_temp_file  # Clean up temporary files
                 return 0  # Gracefully exit function and continue the main script
                 ;;
             [Nn]* )
@@ -165,31 +151,19 @@ ask_cleanup() {
     done
 }
 
-# Ask about updating the flake
+# Ask the user if they want to update the flake
 ask_update_flake() {
     while true; do
         log_action "Do you want to update the flake before rebuilding? (y/n) "
         read -r answer
         case $answer in
             [Yy]* )
-                temp_file=$(mktemp)  # Create a temporary file
-                log "Updating flake and capturing all output..."
+                sleep 1  # Add a small delay to avoid missing initial output
 
-                # Run the update flake command and capture all output directly to the temp file
-                update_flake > "$temp_file" 2>&1  # Redirect output to temp_file
+                # Run the update flake command and print output directly to the terminal
+                update_flake
 
-                # Filter out unwanted lines, such as progress bars or carriage returns "^M"
-                awk '!/\[INFO\]/ && !/\r/ {print}' "$temp_file" | grep -vE '^Downloading|^Fetched|^Resolving' > filtered_temp_file
-
-                if [[ -s filtered_temp_file ]]; then  # Check if filtered temp file is not empty
-                    log "Displaying filtered output..."
-                    less -R filtered_temp_file  # Use less to display the filtered output
-                else
-                    log "No relevant output from flake update."
-                fi
-
-                # Clean up temporary files
-                rm "$temp_file" filtered_temp_file
+                log "Flake update completed."
                 break
                 ;;
             [Nn]* )
@@ -228,15 +202,15 @@ ask_rebuild_after_clean() {
 log "Changing to /persist/etc/nixos/..."
 cd /persist/etc/nixos/ || log_error "Failed to change directory to /persist/etc/nixos/"
 
-# Ask the user if they want to update the flake
-ask_update_flake 
-
 # Run txr and lazygit
 run_txr
 run_lazygit
 
 # Check disk space after lazygit is closed
 check_disk_space
+
+# Ask the user if they want to update the flake
+ask_update_flake 
 
 # Ask if the user wants a dry run first
 ask_dry_run

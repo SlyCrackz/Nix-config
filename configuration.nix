@@ -6,7 +6,7 @@
     ./home.nix
     ./modules/boot.nix
     ./modules/network.nix
-    ./modules/programs.nix
+    ./modules/packages.nix
     ./modules/services.nix
   ];
 

@@ -47,12 +47,12 @@
     xdg.configFile."sway/config".source = pkgs.lib.mkOverride 0 (builtins.toPath ./modules/sway/config);
     
     xdg.userDirs = {
-      desktop = "/home/crackz/desktop";
-      download = "/home/crackz/downloads";
-      documents = "/home/crackz/documents";
-      music = "/home/crackz/music";
-      pictures = "/home/crackz/pictures";
-      videos = "/home/crackz/videos";
+      desktop = "~/desktop";
+      download = "~/downloads";
+      documents = "~/documents";
+      music = "~/media/music";
+      pictures = "~/media/pictures";
+      videos = "~/media/videos";
     };
 
    home.stateVersion = "24.05";

@@ -15,6 +15,14 @@
     "/home/crackz/.local/bin/"
     ];
 
+
+# Enabling Flakes
+  nix = {
+    settings.experimental-features = [ "nix-command" "flakes" ];
+  };
+
+
+
     gtk = {
       enable = true;
       theme = {

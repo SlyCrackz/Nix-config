@@ -2,6 +2,7 @@
 
 {
   imports = [
+    <home-manager/nixos>
     ./hardware-configuration.nix
     ./home.nix
     ./modules/boot.nix
@@ -23,9 +24,6 @@
   "L /var/lib/tailscale - - - - /persist/var/lib/tailscale"
   ];
 
-  # Allow flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  
   # Other system services
   security.rtkit.enable = true;
   security.polkit.enable = true;

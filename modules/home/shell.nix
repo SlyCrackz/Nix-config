@@ -41,6 +41,7 @@
            lzg = "lazygit";
            lzd = "lazydocker";
            upd = "bash update";
+           hm = "nix-shell -p home-manager";
           };
       };  
        carapace.enable = true;

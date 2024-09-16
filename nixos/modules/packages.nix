@@ -14,6 +14,7 @@
     pulseaudio
     tree
     home-manager
+    nh
   ];
  
   programs.dconf.enable = true;

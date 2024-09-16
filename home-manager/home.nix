@@ -21,10 +21,6 @@
     settings.experimental-features = [ "nix-command" "flakes" ];
   };
 
-  environment.sessionVariables = {
-    FLAKE = "~/repos/NixOS-config/nixos"
-  };
-
     gtk = {
       enable = true;
       theme = {

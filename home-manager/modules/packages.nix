@@ -21,5 +21,6 @@
       pkgs.obs-studio
       pkgs.jetbrains.idea-community-bin
     ];
+    
     programs.bash.enable = true;
 }

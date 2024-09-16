@@ -18,9 +18,17 @@
       pkgs.tree
       pkgs.ripgrep
       pkgs.cmatrix
-      pkgs.obs-studio
       pkgs.jetbrains.idea-community-bin
     ];
     
     programs.bash.enable = true;
+
+    programs.obs-studio = {
+      enable = true;
+      plugins = with pkgs.obs-studio-plugins; [
+      wlrobs
+      obs-backgroundremoval
+      obs-pipewire-audio-capture
+      ];
+    };
 }

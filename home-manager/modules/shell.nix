@@ -21,7 +21,7 @@
         hostname = {
           ssh_only = false;
           ssh_symbol = "🌐";
-          format = "[@](bold red)[$hostname](bold yellow)";
+          format = "[@](bold red)[$hostname ](bold yellow)";
           trim_at = ".local";
           disabled = false;
           };

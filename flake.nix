@@ -1,5 +1,5 @@
 {
-  description = "Combined Home Manager and NixOS configuration for crackz";
+  description = "System and Home-Manager Flake";
 
   inputs = {
     # Stable Nixpkgs

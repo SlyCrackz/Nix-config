@@ -6,15 +6,24 @@
     lf
     pavucontrol
     btop
-    pass
-    gnupg
     mangohud
-    inputs.unstablenixpkgs.legacyPackages.${pkgs.system}.neovim
     libnotify
     pulseaudio
-    tree
     home-manager
     nh
+    waybar
+    pavucontrol
+    protonup-qt
+    appimage-run
+    unzip
+    autotiling-rs
+    wmenu
+    mako
+    grim
+    slurp
+    wl-clipboard
+    kanshi
+    inputs.unstablenixpkgs.legacyPackages.${pkgs.system}.neovim
   ];
  
   programs.dconf.enable = true;

@@ -65,8 +65,8 @@
         initialHashedPassword = "\$6\$ZrQwhxOYvxQY8juy\$Agwgx/D2qvJdAKrdR9KgA/eVDyEO6mk5IZgDA220iCOmeoseDGhpchIKaZT1ZZRYHIMgOSdWaL4O2uV1napki0";
         extraGroups = [ "wheel" ];
         uid = 1000;
+        shell = pkgs.zsh;
         home = "/home/crackz";
-        shell = "${pkgs.nushell}/bin/nu";
         openssh.authorizedKeys.keys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGOdrT0hVW1T5MksKlo6R3Ari7ZNO+LNsq6af5SLze8P crackz@m1air"
         ];

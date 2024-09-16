@@ -7,6 +7,14 @@
       enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
+      shellAliases = {
+        nix = "nom";
+        ff = "fastfetch";
+        t = "txr";
+        lzg = "lazygit";
+        lzd = "lazydocker";
+        v = "nvim";
+      };
     };
     starship = {
       enable = true;

@@ -40,6 +40,7 @@
            lzg = "lazygit";
            lzd = "lazydocker";
            upd = "bash update";
+           nix = "nom";
           };
       };  
        carapace.enable = true;

@@ -23,6 +23,8 @@
     slurp
     wl-clipboard
     kanshi
+    nix-output-monitor
+    nvd
     inputs.unstablenixpkgs.legacyPackages.${pkgs.system}.neovim
   ];
  

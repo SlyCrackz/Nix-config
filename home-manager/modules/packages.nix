@@ -19,6 +19,7 @@
       pkgs.ripgrep
       pkgs.cmatrix
       pkgs.jetbrains.idea-community-bin
+      pkgs.kdePackages.kdenlive
     ];
     
     programs.bash.enable = true;

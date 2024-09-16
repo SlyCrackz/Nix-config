@@ -3,7 +3,6 @@
 {
   environment.systemPackages = with pkgs; [
     fastfetch
-    lf
     pavucontrol
     btop
     mangohud

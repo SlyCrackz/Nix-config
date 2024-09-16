@@ -14,6 +14,8 @@
         lzg = "lazygit";
         lzd = "lazydocker";
         v = "nvim";
+        lf = "yazi";
+        y = "yazi";
       };
       initExtra = ''
         precmd() { print -Pn "\e]0;%~\a" }

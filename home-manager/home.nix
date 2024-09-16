@@ -7,6 +7,8 @@
     ./modules/shell.nix
     ./modules/packages.nix
     ./modules/terminal.nix
+    ./modules/obs.nix
+    ./modules/yazi.nix
   ];
     home.username = "crackz";
     home.homeDirectory = "/home/crackz";

@@ -48,6 +48,24 @@
     '';
   };
 
+  # Create a systemd service to configure ZRAM
+  systemd.services.zram = {
+    description = "ZRAM Swap Setup";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "sysinit.target" ]; # Ensure this runs after basic system initialization
+
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.bash}/bin/sh -c 'echo lz4 > /sys/block/zram0/comp_algorithm && echo 16G > /sys/block/zram0/disksize && /run/current-system/sw/bin/mkswap /dev/zram0 && /run/current-system/sw/bin/swapon /dev/zram0'";
+      RemainAfterExit = true;
+    };
+  };
+
+  # Optionally configure system-wide swap settings (vm.swappiness)
+  systemd.tmpfiles.rules = [
+    "w /proc/sys/vm/swappiness - - - - 150" # Increase swappiness to prefer ZRAM over disk
+  ];
+
   # SSH configuration
   services.openssh = {
     enable = true;

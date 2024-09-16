@@ -16,9 +16,8 @@
         v = "nvim";
       };
       initExtra = ''
-        # Update terminal title with working directory and command
-        precmd() { print -Pn "\e]0;%n@%m: %~\a" }
-        preexec() { print -Pn "\e]0;%n@%m: $1\a" }
+        precmd() { print -Pn "\e]0;%~\a" }
+        preexec() { print -Pn "\e]0;$1\a" }
       '';
     };
     starship = {

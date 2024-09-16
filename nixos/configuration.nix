@@ -40,6 +40,10 @@
   #emoji = [ "Noto Color Emoji" ];
   #};
 
+  environment.sessionVariables = {
+    FLAKE = "/home/crackz/repos/NixOS-config";
+  };
+
   environment.variables.EDITOR = "nvim";  
   # Neovim settings
 #  programs.neovim = {

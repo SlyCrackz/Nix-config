@@ -16,6 +16,7 @@
         v = "nvim";
         lf = "yazi";
         y = "yazi";
+        z = "zellij";
       };
       initExtra = ''
         precmd() { print -Pn "\e]0;%~\a" }

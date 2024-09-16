@@ -15,6 +15,11 @@
         lzd = "lazydocker";
         v = "nvim";
       };
+      initExtra = ''
+        # Update terminal title with working directory and command
+        precmd() { print -Pn "\e]0;%n@%m: %~\a" }
+        preexec() { print -Pn "\e]0;%n@%m: $1\a" }
+      '';
     };
     starship = {
       enable = true;
@@ -32,7 +37,7 @@
           format = "[@](bold red)[$hostname ](bold yellow)";
           trim_at = ".local";
           disabled = false;
-          };
+        };
         add_newline = false;
         character = {
           success_symbol = "[➜](bold green)";

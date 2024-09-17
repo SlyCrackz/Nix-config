@@ -38,6 +38,12 @@
           trim_at = ".local";
           disabled = false;
         };
+        directory = {
+          format = "[via ](green)[$path ](bold blue)[$read_only](bold red)";
+          truncation_length = 5;
+          home_symbol = "🐱";
+          truncation_symbol = " ";
+        };
         add_newline = false;
         character = {
           success_symbol = "[➜](bold green)";

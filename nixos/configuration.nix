@@ -41,7 +41,7 @@
   #};
 
   environment.sessionVariables = {
-    FLAKE = "/home/crackz/repos/NixOS-config";
+    FLAKE = "/home/crackz/repos/Nix-config";
   };
 
   environment.variables.EDITOR = "nvim";  

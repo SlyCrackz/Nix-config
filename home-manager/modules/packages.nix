@@ -7,8 +7,6 @@
       pkgs.firefox
       pkgs.gnupg
       pkgs.pass
-      pkgs.rustup
-      pkgs.clang
       pkgs.cava
       pkgs.jq
       pkgs.vesktop

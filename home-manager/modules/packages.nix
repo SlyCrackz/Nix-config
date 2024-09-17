@@ -21,6 +21,4 @@
       pkgs.jetbrains.idea-community-bin
       pkgs.obsidian
     ];
-    
-    programs.bash.enable = true;
 }

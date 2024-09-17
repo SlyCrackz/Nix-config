@@ -5,7 +5,8 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
@@ -14,28 +15,33 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "rpool/encrypted/local/root";
+    {
+      device = "rpool/encrypted/local/root";
       fsType = "zfs";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/1FBC-972C";
+    {
+      device = "/dev/disk/by-uuid/1FBC-972C";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
 
   fileSystems."/nix" =
-    { device = "rpool/encrypted/local/nix";
+    {
+      device = "rpool/encrypted/local/nix";
       fsType = "zfs";
     };
 
   fileSystems."/home" =
-    { device = "rpool/encrypted/safe/home";
+    {
+      device = "rpool/encrypted/safe/home";
       fsType = "zfs";
     };
 
   fileSystems."/persist" =
-    { device = "rpool/encrypted/safe/persist";
+    {
+      device = "rpool/encrypted/safe/persist";
       fsType = "zfs";
     };
 

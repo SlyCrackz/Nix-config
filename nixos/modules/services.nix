@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-# Tailscale
+  # Tailscale
   services.tailscale.enable = true;
   services.tailscale.useRoutingFeatures = "client";
 
@@ -76,5 +76,5 @@
       { path = "/persist/etc/ssh/ssh_host_rsa_key"; type = "rsa"; bits = 4096; }
     ];
   };
-  
+
 }

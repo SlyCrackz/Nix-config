@@ -18,12 +18,13 @@
       # Define both stable and unstable packages
       unstablepkgs = unstablenixpkgs.legacyPackages.x86_64-linux;
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
-    in {
+    in
+    {
       # NixOS system configuration
       nixosConfigurations.nixbox = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./nixos/configuration.nix  # Point to the NixOS system config file
+          ./nixos/configuration.nix # Point to the NixOS system config file
         ];
       };
 
@@ -31,7 +32,7 @@
       homeConfigurations.crackz = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
-          ./home-manager/home.nix  # Point to the Home Manager config file
+          ./home-manager/home.nix # Point to the Home Manager config file
         ];
         extraSpecialArgs = {
           unstablepkgs = unstablepkgs;

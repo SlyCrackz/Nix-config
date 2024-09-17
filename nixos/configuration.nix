@@ -19,7 +19,7 @@
 
   # Persist Certain stuff
   systemd.tmpfiles.rules = [
-  "L /var/lib/tailscale - - - - /persist/var/lib/tailscale"
+    "L /var/lib/tailscale - - - - /persist/var/lib/tailscale"
   ];
 
   # Other system services
@@ -35,7 +35,7 @@
     intel-one-mono
     (nerdfonts.override { fonts = [ "IntelOneMono" ]; })
   ];
-  
+
   #fonts.aliases = {
   #emoji = [ "Noto Color Emoji" ];
   #};
@@ -44,12 +44,12 @@
     FLAKE = "/home/crackz/repos/Nix-config";
   };
 
-  environment.variables.EDITOR = "nvim";  
+  environment.variables.EDITOR = "nvim";
   # Neovim settings
-#  programs.neovim = {
-#    enable = true;
-#    defaultEditor = true;
-#  };
+  #  programs.neovim = {
+  #    enable = true;
+  #    defaultEditor = true;
+  #  };
 
   # User configuration
   users = {

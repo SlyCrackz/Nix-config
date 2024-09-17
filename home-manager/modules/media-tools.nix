@@ -1,8 +1,9 @@
 { pkgs, ... }:
 
 {
-  home.packages = [
-    pkgs.kdePackages.kdenlive # Enable Kdenlive by adding it to the home packages
+  home.packages = with pkgs; [
+    kdePackages.kdenlive
+    vlc
   ];
 
   programs.obs-studio = {

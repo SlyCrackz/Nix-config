@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 {
   environment.systemPackages = with pkgs; [
@@ -15,7 +15,6 @@
     unzip
     nix-output-monitor
     nvd
-    inputs.unstablenixpkgs.legacyPackages.${pkgs.system}.neovim
   ];
  
   programs.dconf.enable = true;

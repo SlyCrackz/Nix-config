@@ -13,7 +13,7 @@
     };
   };
 
-  outputs = { nixpkgs, unstablenixpkgs, home-manager, ... } @ inputs:
+  outputs = { nixpkgs, unstablenixpkgs, home-manager, ... }:
     let
       # Define both stable and unstable packages
       unstablepkgs = unstablenixpkgs.legacyPackages.x86_64-linux;
@@ -25,7 +25,6 @@
         modules = [
           ./nixos/configuration.nix  # Point to the NixOS system config file
         ];
-        specialArgs = { inherit inputs; };
       };
 
       # Home Manager configuration
@@ -34,6 +33,9 @@
         modules = [
           ./home-manager/home.nix  # Point to the Home Manager config file
         ];
+        extraSpecialArgs = {
+          unstablepkgs = unstablepkgs;
+        };
       };
     };
 }

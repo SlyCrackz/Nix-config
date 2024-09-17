@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, unstablepkgs, ... }:
 
 {
   nixpkgs.config.allowUnfree = true; 
@@ -20,5 +20,6 @@
       pkgs.cmatrix
       pkgs.jetbrains.idea-community-bin
       pkgs.obsidian
+      unstablepkgs.neovim
     ];
 }

@@ -1,6 +1,8 @@
 { config, pkgs, lib, ... }:
 
 {
+  nixpkgs.config.allowUnfree = true; 
+    
     home.packages = [
       pkgs.firefox
       pkgs.gnupg
@@ -19,7 +21,7 @@
       pkgs.ripgrep
       pkgs.cmatrix
       pkgs.jetbrains.idea-community-bin
-      pkgs.kdePackages.kdenlive
+      pkgs.obsidian
     ];
     
     programs.bash.enable = true;

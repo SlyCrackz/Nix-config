@@ -7,7 +7,7 @@
     ./modules/shell.nix
     ./modules/packages.nix
     ./modules/terminal.nix
-    ./modules/obs.nix
+    ./modules/media-tools.nix
     ./modules/yazi.nix
   ];
     home.username = "crackz";

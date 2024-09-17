@@ -6,22 +6,13 @@
     pavucontrol
     btop
     mangohud
-    libnotify
     pulseaudio
     home-manager
     nh
-    waybar
     pavucontrol
     protonup-qt
     appimage-run
     unzip
-    autotiling-rs
-    wmenu
-    mako
-    grim
-    slurp
-    wl-clipboard
-    kanshi
     nix-output-monitor
     nvd
     inputs.unstablenixpkgs.legacyPackages.${pkgs.system}.neovim

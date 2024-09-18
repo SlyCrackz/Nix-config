@@ -9,6 +9,7 @@
     ./modules/terminal.nix
     ./modules/media-tools.nix
     ./modules/yazi.nix
+    ./modules/gaming.nix
   ];
   home.username = "crackz";
   home.homeDirectory = "/home/crackz";

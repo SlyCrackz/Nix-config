@@ -47,7 +47,8 @@ set $down j
 set $up k
 set $right l
 set $term foot
-set $menu "wmenu-run -N '#282828' -n '#ebdbb2' -S '#282828' -s '#fb4934'" 
+#set $menu "wmenu-run -N '#282828' -n '#ebdbb2' -S '#282828' -s '#fb4934'" 
+set $menu "wofi --show drun"
 
 ### Output configuration
 workspace 2 output HDMI-A-1

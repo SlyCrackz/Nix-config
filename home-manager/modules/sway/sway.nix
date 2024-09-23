@@ -6,7 +6,7 @@
     mako
     slurp
     wl-clipboard
-    wmenu
+    wofi
     autotiling-rs
     kanshi
     libnotify

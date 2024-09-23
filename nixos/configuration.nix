@@ -36,6 +36,11 @@
     (nerdfonts.override { fonts = [ "IntelOneMono" ]; })
   ];
 
+  # Allow realtime processing for people in Users Group
+  security.pam.loginLimits = [
+    { domain = "@users"; item = "rtprio"; type = "-"; value = 1; }
+  ];
+
   #fonts.aliases = {
   #emoji = [ "Noto Color Emoji" ];
   #};

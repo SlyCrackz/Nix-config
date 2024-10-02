@@ -79,6 +79,7 @@
     };
   };
 
+  time.hardwareClockInLocalTime = true;
   # System state version
   system.stateVersion = "21.11";
 }

@@ -15,6 +15,7 @@
     unzip
     nix-output-monitor
     nvd
+    protontricks
   ];
 
   programs.dconf.enable = true;

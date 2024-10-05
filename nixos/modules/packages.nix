@@ -13,6 +13,7 @@
     protonup-qt
     appimage-run
     unzip
+    unrar
     nix-output-monitor
     nvd
     protontricks

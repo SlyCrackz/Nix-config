@@ -18,6 +18,12 @@
     nix-output-monitor
     nvd
     protontricks
+    wget
+    xdotool
+    xorg.xprop
+    xorg.xwininfo
+    unixtools.xxd
+    yad
     icu
   ];
 

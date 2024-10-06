@@ -17,6 +17,7 @@
     nix-output-monitor
     nvd
     protontricks
+    icu
   ];
 
   programs.dconf.enable = true;

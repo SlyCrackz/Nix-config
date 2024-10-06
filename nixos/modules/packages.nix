@@ -9,6 +9,7 @@
     pulseaudio
     home-manager
     nh
+    xfce.thunar
     pavucontrol
     protonup-qt
     appimage-run

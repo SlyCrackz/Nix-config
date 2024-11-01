@@ -5,6 +5,7 @@
 
   home.packages = [
     pkgs.google-chrome
+    pkgs.firefox
     pkgs.gnupg
     pkgs.pass
     pkgs.cava

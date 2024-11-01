@@ -3,7 +3,6 @@
 {
   imports = [
     ./modules/git.nix
-    ./modules/sway/sway.nix
     ./modules/shell.nix
     ./modules/packages.nix
     ./modules/terminal.nix

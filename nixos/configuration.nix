@@ -9,6 +9,16 @@
     ./modules/services.nix
   ];
 
+  services.xserver.enable = true;
+  services.displayManager.sddm.enable = true;
+  services.desktopManager.plasma6.enable = true;
+
+  environment.plasma5.excludePackages = with pkgs.libsForQt5; [
+  plasma-browser-integration
+  konsole
+  oxygen
+  ];
+
   nix.nixPath = [
     "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
     "nixos-config=/persist/etc/nixos/configuration.nix"

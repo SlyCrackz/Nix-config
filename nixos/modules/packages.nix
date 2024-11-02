@@ -22,7 +22,7 @@
     xorg.xprop
     xorg.xwininfo
     unixtools.xxd
-    #yad
+    yad #for steamtinkerlaunch
     icu
   ];
 

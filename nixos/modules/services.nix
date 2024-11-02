@@ -20,8 +20,16 @@
   # ZFS
   services.zfs = {
     autoScrub.enable = true;
-    autoSnapshot.enable = true;
+    autoSnapshot = {
+      enable = true;
+      frequent = 4;   # Keep the last 4 frequent snapshots
+      hourly = 12;    # Keep the last 12 hourly snapshots
+      daily = 7;      # Keep the last 7 daily snapshots
+      weekly = 4;     # Keep the last 4 weekly snapshots
+      monthly = 2;    # Keep the last 2 monthly snapshots
+    };
   };
+
 
   # Terminal Lock
   services.pcscd.enable = true;

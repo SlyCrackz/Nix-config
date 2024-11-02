@@ -37,6 +37,8 @@
     "L /var/lib/tailscale - - - - /persist/var/lib/tailscale"
   ];
 
+  nix.settings.extra-experimental-features = [ "nix-command" "flakes" ];
+
   # Other system services
   security.rtkit.enable = true;
   security.polkit.enable = true;

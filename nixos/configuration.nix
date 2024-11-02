@@ -7,21 +7,7 @@
     ./modules/network.nix
     ./modules/packages.nix
     ./modules/services.nix
-  ];
-
-  services.xserver = {
-    enable = true;
-    displayManager.gdm.enable = true;
-  };
-
-  services.desktopManager.plasma6.enable = true;
-
-  environment.plasma6.excludePackages = with pkgs.libsForQt5; [
-  kate
-  elisa
-  okular
-  konsole
-  oxygen
+    ./modules/plasma.nix
   ];
 
   nix.nixPath = [
@@ -58,20 +44,11 @@
     { domain = "@users"; item = "rtprio"; type = "-"; value = 1; }
   ];
 
-  #fonts.aliases = {
-  #emoji = [ "Noto Color Emoji" ];
-  #};
-
   environment.sessionVariables = {
     FLAKE = "/home/crackz/repos/Nix-config";
   };
 
   environment.variables.EDITOR = "nvim";
-  # Neovim settings
-  #  programs.neovim = {
-  #    enable = true;
-  #    defaultEditor = true;
-  #  };
 
   # User configuration
   users = {

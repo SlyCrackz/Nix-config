@@ -6,7 +6,10 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelParams = [ "elevator=none" ];
-  boot.kernelModules = [ "zram" ];
+  boot.kernelModules = [ "zram" "kvm-intel" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
+  boot.initrd.kernelModules = [ ];
+  boot.extraModulePackages = [ ];
   # ZFS configuration
   boot.initrd.postDeviceCommands = lib.mkAfter ''
     zpool import rpool

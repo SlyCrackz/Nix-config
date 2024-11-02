@@ -9,10 +9,7 @@
       (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+
 
   fileSystems."/" =
     {
@@ -53,13 +50,9 @@
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
   time.timeZone = lib.mkDefault "America/New_York";
-  # networking.interfaces.enp4s0.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wlo1.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-  #hardware.graphics.enable = true;
-  #hardware.graphics.enable32Bit = true;
   hardware.opengl.enable = true;
   hardware.nvidia = {
     modesetting.enable = true;
@@ -67,14 +60,6 @@
     powerManagement.finegrained = false;
     open = false;
     nvidiaSettings = true;
-    #prime = {
-    #  intelBusId = "PCI:0:2:0";
-    #  nvidiaBusId = "PCI:1:0:0";
-    #  offload = {
-    #    enable = true;
-    #    enableOffloadCmd = true;
-    #  };
-    #};
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 

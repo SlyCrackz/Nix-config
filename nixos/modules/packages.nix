@@ -15,6 +15,7 @@
     nix-output-monitor
     nvd
     protontricks
+    wl-clipboard
     wget
     xdotool
     xorg.xprop

@@ -3,14 +3,13 @@
 {
   environment.systemPackages = with pkgs; [
     fastfetch
-    pavucontrol
     btop
     mangohud
     pulseaudio
     home-manager
     nh
-    xfce.thunar
-    pavucontrol
+    #xfce.thunar
+    #pavucontrol
     protonup-qt
     appimage-run
     unzip
@@ -23,7 +22,7 @@
     xorg.xprop
     xorg.xwininfo
     unixtools.xxd
-    yad
+    #yad
     icu
   ];
 

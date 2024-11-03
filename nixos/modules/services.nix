@@ -14,6 +14,8 @@
     #jack.enable = true;
   };
 
+  services.thermald.enable = true;
+
   # Video drivers 
   services.xserver.videoDrivers = [ "intel" "nvidia" ];
 

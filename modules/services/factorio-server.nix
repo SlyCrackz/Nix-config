@@ -45,6 +45,11 @@ in
     '';
   };
 
+  # Add `steam` package for compatibility runtime
+  environment.systemPackages = [
+    pkgs.steam
+  ];
+
   # Define and enable the Factorio Server Manager as a systemd service
   systemd.services.factorio-manager = {
     description = "Open Factorio Server Manager";

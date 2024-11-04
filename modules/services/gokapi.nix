@@ -19,10 +19,12 @@ let
 in
 {
   # Create the gokapi user
+  users.groups.gokapi = {};
   users.users.gokapi = {
     isSystemUser = true;
     home = "/var/lib/gokapi";
     description = "Gokapi Service User";
+    group = "gokapi";
   };
 
   # Enable Gokapi as a systemd service

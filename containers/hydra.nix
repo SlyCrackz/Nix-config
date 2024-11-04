@@ -21,7 +21,7 @@ in {
     useDHCP = false;
     ipv4.addresses = [
       {
-        address = "10.0.1.106"; # Replace with the desired static IP
+        address = "10.0.1.109"; # Replace with the desired static IP
         prefixLength = 8;      # Adjust prefix length if necessary
       }
     ];

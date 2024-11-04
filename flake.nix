@@ -44,6 +44,14 @@
           unstablepkgs = unstablepkgs;
         };
       };
+
+      # Nginx container configuration
+      nixosConfigurations.nginx = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./containers/nginx.nix # Point to the Nginx container config file
+        ];
+      };
     };
 }
 

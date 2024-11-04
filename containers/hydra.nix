@@ -38,7 +38,8 @@ in {
   # Enable Hydra service
   services.hydra = {
     enable = true;
-    hydraURL = "http://localhost:3000"; # Set to the container's static IP and desired port
+    hydraURL = "http://localhost:3000";
+    bindAddress = "0.0.0.0";# Set to the container's static IP and desired port
     notificationSender = "hydra@localhost";
     useSubstitutes = false;
     buildMachinesFiles = [];

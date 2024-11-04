@@ -57,7 +57,7 @@ in
     after = [ "network.target" ];
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
-      ExecStart = "/root/factorio-server-manager/factorio-server-manager";
+      ExecStart = "/root/factorio-server-manager/factorio-server-manager --dir /root/factorio";
       Restart = "on-failure";
     };
   };

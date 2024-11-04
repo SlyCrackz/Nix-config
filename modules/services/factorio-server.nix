@@ -58,8 +58,10 @@ in
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       ExecStart = "/run/current-system/sw/bin/steam-run /root/factorio-server-manager/factorio-server-manager --dir /root/factorio";
+      WorkingDirectory = "/root/factorio-server-manager";  # Set the working directory
       Restart = "on-failure";
     };
   };
+
 }
 

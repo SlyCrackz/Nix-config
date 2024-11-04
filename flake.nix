@@ -62,7 +62,17 @@
       nixosConfigurations.caddy = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./containers/caddy.nix # Point to the container config file
+          ./modules/container-base.nix # Point to the container config file
+          ./modules/services/caddy.nix
+        ];
+      };
+      
+      # caddy configuration
+      nixosConfigurations.gokapi = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./modules/container-base.nix # Point to the container config file
+          ./modules/services/gokapi.nix
         ];
       };
     };

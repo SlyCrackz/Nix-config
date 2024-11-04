@@ -23,6 +23,7 @@
     unixtools.xxd
     yad #for steamtinkerlaunch
     icu
+    sbctl #lanzaboote
   ];
 
   programs.dconf.enable = true;

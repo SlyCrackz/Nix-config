@@ -37,9 +37,9 @@ in {
   # Enable Hydra service
   services.hydra = {
     enable = true;
-    hydraURL = "http://10.0.1.109:3000"; # Set to the container's static IP and desired port
-    notificationSender = "hydra@slycrackz.xyz";
-    useSubstitutes = true;
+    hydraURL = "http://localhost:3000"; # Set to the container's static IP and desired port
+    notificationSender = "hydra@localhost";
+    useSubstitutes = false;
     buildMachinesFiles = [];
   };
 

@@ -44,14 +44,9 @@ in {
 
   # Enable PostgreSQL for Hydra (default database for Hydra)
   services.postgresql.enable = true;
-  services.postgresql.authentication = pkgs.lib.mkOverride 10 [
-    {
-      type = "local";
-      database = "all";
-      user = "all";
-      method = "trust";
-    }
-  ];
+  services.postgresql.extraConfig = ''
+    local all all trust
+  '';
 
   time.timeZone = timeZone;
 

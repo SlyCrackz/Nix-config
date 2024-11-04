@@ -17,6 +17,7 @@ in {
 
   boot.isContainer = true;
   networking.hostName = hostname;
+  networking.defaultGateway = "10.0.0.1";
   networking.interfaces.eth0 = {
     useDHCP = false;
     ipv4.addresses = [
@@ -25,7 +26,6 @@ in {
         prefixLength = 8;         # Prefix length for the subnet (e.g., 24 for 255.255.255.0)
       }
     ];
-    ipv4.gateway = "10.0.0.1";  # Replace with the IP address of your router or gateway
   };
 
 

@@ -1,7 +1,8 @@
+
 { pkgs, ... }:
 
 let
-  # Define the Factorio headless server as a derivation fetched from the website
+  # Factorio headless server derivation
   factorioHeadless = pkgs.stdenv.mkDerivation rec {
     pname = "factorio-headless";
     version = "2.0.14";
@@ -12,13 +13,12 @@ let
     };
     buildInputs = [ pkgs.xz ];
     installPhase = ''
-      # Extract entire Factorio folder structure into /root/factorio
-      mkdir -p /root
-      tar -xJf $src -C /root
+      mkdir -p $out/factorio
+      tar -xJf $src -C $out/factorio
     '';
   };
 
-  # Define the Factorio Server Manager binary as a derivation
+  # Factorio Server Manager derivation
   factorioManager = pkgs.stdenv.mkDerivation rec {
     pname = "factorio-server-manager";
     version = "0.10.1";
@@ -28,15 +28,25 @@ let
     };
     buildInputs = [ pkgs.unzip ];
     installPhase = ''
-      # Extract entire Factorio Server Manager folder structure into /root/factorio-server-manager
-      mkdir -p /root/factorio-server-manager
-      unzip $src -d /root/factorio-server-manager
-      chmod +x /root/factorio-server-manager/factorio-server-manager
+      mkdir -p $out/factorio-server-manager
+      unzip $src -d $out/factorio-server-manager
+      chmod +x $out/factorio-server-manager/factorio-server-manager
     '';
   };
 in
 {
-  # No need to add either to systemPackages, as we’re installing to /root directly
+  # Define a post-activation script to copy the files to /root
+  system.activationScripts.factorioFiles = {
+    text = ''
+      # Copy Factorio headless server files to /root/factorio
+      mkdir -p /root/factorio
+      cp -r ${factorioHeadless}/factorio/* /root/factorio/
+
+      # Copy Factorio Server Manager files to /root/factorio-server-manager
+      mkdir -p /root/factorio-server-manager
+      cp -r ${factorioManager}/factorio-server-manager/* /root/factorio-server-manager/
+    '';
+  };
 
   # Define and enable the Factorio Server Manager as a systemd service
   systemd.services.factorio-manager = {

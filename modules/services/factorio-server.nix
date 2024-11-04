@@ -57,7 +57,7 @@ in
     after = [ "network.target" ];
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
-      ExecStart = "steam-run ./root/factorio-server-manager/factorio-server-manager --dir /root/factorio";
+      ExecStart = "/run/current-system/sw/bin/steam-run /root/factorio-server-manager/factorio-server-manager --dir /root/factorio";
       Restart = "on-failure";
     };
   };

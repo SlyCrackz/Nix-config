@@ -8,10 +8,8 @@
   environment.systemPackages = [
     pkgs.vim
     pkgs.git
-    pkgs.caddy
   ];
 
-  
   # Enable SSH for remote access
   services.openssh.enable = true;
 

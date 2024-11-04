@@ -1,6 +1,7 @@
 {
   modulesPath,
   pkgs,
+  lib,
   ...
 }: let
   hostname = "ct-hydra-109";
@@ -44,11 +45,14 @@ in {
 
   # Enable PostgreSQL for Hydra (default database for Hydra)
   services.postgresql.enable = true;
-  services.postgresql.settings = {
-  "hba_file" = ''
-    local all all trust
-  '';
-  };
+  services.postgresql.authentication = lib.mkForce [
+    {
+      type = "local";
+      database = "all";
+      user = "all";
+      method = "trust";
+    }
+  ];
 
   time.timeZone = timeZone;
 

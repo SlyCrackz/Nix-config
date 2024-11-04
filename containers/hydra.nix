@@ -45,14 +45,11 @@ in {
 
   # Enable PostgreSQL for Hydra (default database for Hydra)
   services.postgresql.enable = true;
-  services.postgresql.authentication = lib.mkForce [
-    {
-      type = "local";
-      database = "all";
-      user = "all";
-      method = "trust";
-    }
-  ];
+  services.postgresql.authentication = lib.mkForce ''
+    local all all trust
+    host all all 127.0.0.1/32 trust
+    host all all ::1/128 trust
+  '';
 
   time.timeZone = timeZone;
 

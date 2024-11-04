@@ -46,10 +46,10 @@
       };
 
       # Nginx container configuration
-      nixosConfigurations.nginx = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.container = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./containers/nginx.nix # Point to the Nginx container config file
+          ./containers/container.nix # Point to the container config file
         ];
       };
     };

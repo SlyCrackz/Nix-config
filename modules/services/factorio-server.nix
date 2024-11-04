@@ -1,3 +1,4 @@
+
 { pkgs, ... }:
 
 let
@@ -8,6 +9,8 @@ let
     src = pkgs.fetchurl {
       url = "https://www.factorio.com/get-download/${version}/headless/linux64";
       sha256 = "5a4bc4c3b2a97ed1fc58eb796321e848dcc64435bd91013dd9c78a14a8ce8815";
+      # Explicitly set the output filename to help Nix recognize the file type
+      name = "factorio-headless-${version}.tar.xz";
     };
     buildInputs = [ pkgs.xz ];  # Include xz for .tar.xz extraction
     installPhase = ''

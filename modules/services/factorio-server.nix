@@ -48,7 +48,7 @@ in
   nixpkgs.config.allowUnfree = true;
   # Add `steam` package for compatibility runtime
   environment.systemPackages = [
-    pkgs.steam
+    pkgs.steam-run
   ];
 
   # Define and enable the Factorio Server Manager as a systemd service

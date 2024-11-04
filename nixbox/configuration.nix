@@ -1,15 +1,6 @@
 { pkgs, ... }:
 
 {
-  imports = [
-    ./hardware-configuration.nix
-    ./modules/boot.nix
-    ./modules/network.nix
-    ./modules/packages.nix
-    ./modules/services.nix
-    ./modules/plasma.nix
-  ];
-
   nix.nixPath = [
     "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
     "nixos-config=/persist/etc/nixos/configuration.nix"

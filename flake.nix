@@ -30,7 +30,13 @@
         system = "x86_64-linux";
         modules = [
           lanzaboote.nixosModules.lanzaboote
-          ./nixos/configuration.nix # Point to the NixOS system config file
+          ./nixbox/configuration.nix # Point to the NixOS system config file
+          ./nixbox/hardware-configuration.nix
+          ./nixbox/boot.nix
+          ./nixbox/plasma.nix
+          ./nixbox/network.nix
+          ./nixbox/packages.nix
+          ./nixbox/services.nix
         ];
       };
 
@@ -39,6 +45,13 @@
         inherit pkgs;
         modules = [
           ./home-manager/home.nix # Point to the Home Manager config file
+          ./home-manager/git.nix
+          ./home-manager/shell.nix
+          ./home-manager/packages.nix
+          ./home-manager/terminal.nix
+          ./home-manager/media-tools.nix
+          ./home-manager/gaming.nix
+          ./home-manager/yazi.nix
         ];
         extraSpecialArgs = {
           unstablepkgs = unstablepkgs;

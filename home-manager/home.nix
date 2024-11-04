@@ -1,15 +1,6 @@
 { pkgs, ... }:
 
 {
-  imports = [
-    ./modules/git.nix
-    ./modules/shell.nix
-    ./modules/packages.nix
-    ./modules/terminal.nix
-    ./modules/media-tools.nix
-    ./modules/gaming.nix
-    ./modules/yazi.nix
-  ];
   home.username = "crackz";
   home.homeDirectory = "/home/crackz";
   home.sessionPath = [

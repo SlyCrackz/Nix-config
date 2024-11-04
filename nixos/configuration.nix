@@ -21,6 +21,7 @@
   # Persist Certain stuff
   systemd.tmpfiles.rules = [
     "L /var/lib/tailscale - - - - /persist/var/lib/tailscale"
+    "L /etc/secureboot - - - - /persist/etc/secureboot"
   ];
 
   nix.settings.extra-experimental-features = [ "nix-command" "flakes" ];

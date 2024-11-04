@@ -13,7 +13,7 @@
   boot.loader.systemd-boot.enable = lib.mkForce false;
   boot.lanzaboote = {
     enable = true;
-    pkiBundle = "/boot/secureboot";
+    pkiBundle = "/etc/secureboot";
   };
   # ZFS configuration
   boot.initrd.postDeviceCommands = lib.mkAfter ''

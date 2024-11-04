@@ -44,9 +44,11 @@ in {
 
   # Enable PostgreSQL for Hydra (default database for Hydra)
   services.postgresql.enable = true;
-  services.postgresql.extraConfig = ''
+  services.postgresql.settings = {
+  "hba_file" = ''
     local all all trust
   '';
+  };
 
   time.timeZone = timeZone;
 

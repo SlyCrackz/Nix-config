@@ -66,6 +66,15 @@
           ./modules/services/caddy.nix
         ];
       };
+
+      # factorio server
+      nixosConfigurations.ct-factorio-120 = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./modules/container-base.nix
+          ./modules/services/factorio-server.nix
+        ];
+      };
     };
 }
 

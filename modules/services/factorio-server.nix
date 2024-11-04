@@ -1,4 +1,3 @@
-
 { pkgs, ... }:
 
 let
@@ -16,11 +15,6 @@ let
       mkdir -p $out
       tar -xJf $src --strip-components=1 -C $out
     '';
-    # Copy to /root/factorio after installation
-    postInstall = ''
-      mkdir -p /root/factorio
-      cp -r $out/* /root/factorio/
-    '';
   };
 
   # Define the prebuilt Factorio Server Manager binary
@@ -37,19 +31,21 @@ let
       unzip $src -d $out/bin
       chmod +x $out/bin/factorio-server-manager
     '';
-    # Copy to /root/factorio-manager after installation
-    postInstall = ''
-      mkdir -p /root/factorio-manager
-      cp -r $out/bin/* /root/factorio-manager/
-    '';
   };
 in
 {
-  # System-wide packages (optional, if you still want them globally accessible)
+  # System-wide packages, using the custom Factorio headless derivation
   environment.systemPackages = [
     factorioHeadless
-    factorioManager
   ];
+
+  # Symlink Factorio binaries to /root for easier access
+  environment.etc."factorio" = {
+    source = "${factorioHeadless}/bin";  # Symlink the headless server
+  };
+  environment.etc."factorio-manager" = {
+    source = "${factorioManager}/bin/factorio-server-manager";  # Symlink the server manager
+  };
 
   # Define and enable the Factorio Server Manager as a systemd service
   systemd.services.factorio-manager = {
@@ -57,7 +53,7 @@ in
     after = [ "network.target" ];
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
-      ExecStart = "/root/factorio-manager/factorio-server-manager";
+      ExecStart = "${factorioManager}/bin/factorio-server-manager";
       Restart = "on-failure";
     };
   };

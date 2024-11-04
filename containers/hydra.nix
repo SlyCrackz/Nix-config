@@ -18,6 +18,7 @@ in {
   boot.isContainer = true;
   networking.hostName = hostname;
   networking.defaultGateway = "10.0.0.1";
+  networking.nameservers = [ "10.0.0.1" ];
   networking.interfaces.eth0 = {
     useDHCP = false;
     ipv4.addresses = [

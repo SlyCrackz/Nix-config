@@ -1,4 +1,3 @@
-
 { pkgs, ... }:
 
 let
@@ -38,11 +37,11 @@ in
   # Define a post-activation script to copy the files to /root
   system.activationScripts.factorioFiles = {
     text = ''
-      # Copy Factorio headless server files to /root/factorio
+      # Copy contents of Factorio headless server to /root/factorio without nesting
       mkdir -p /root/factorio
       cp -r ${factorioHeadless}/factorio/* /root/factorio/
 
-      # Copy Factorio Server Manager files to /root/factorio-server-manager
+      # Copy contents of Factorio Server Manager to /root/factorio-server-manager without nesting
       mkdir -p /root/factorio-server-manager
       cp -r ${factorioManager}/factorio-server-manager/* /root/factorio-server-manager/
     '';

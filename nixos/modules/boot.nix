@@ -17,7 +17,6 @@
   };
   # ZFS configuration
   boot.initrd.postDeviceCommands = lib.mkAfter ''
-    zpool import rpool
     zfs rollback -r rpool/encrypted/local/root@blank
   '';
 }

@@ -14,6 +14,12 @@
     #jack.enable = true;
   };
 
+  # iPhone mounting
+  services.usbmuxd = {
+  enable = true;
+  package = pkgs.usbmuxd2;
+  };
+
   services.thermald.enable = true;
 
   # Video drivers 

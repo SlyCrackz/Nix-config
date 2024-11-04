@@ -24,6 +24,8 @@
     yad #for steamtinkerlaunch
     icu
     sbctl #lanzaboote
+    libimobiledevice #iphone mounting
+    ifuse #iphone mounting
   ];
 
   programs.dconf.enable = true;

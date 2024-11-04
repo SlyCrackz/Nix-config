@@ -19,7 +19,7 @@
   services.caddy = {
     enable = true;
     package = pkgs.caddy;
-    config = ''
+    extraConfig = ''
       byteshift.cc {
         reverse_proxy 10.0.1.106:80
       }
@@ -37,5 +37,7 @@
       }
     '';
   };
+
+  system.stateVersion = "24.05";
 }
 

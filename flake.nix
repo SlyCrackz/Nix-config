@@ -45,11 +45,11 @@
         };
       };
 
-      # Nginx container configuration
-      nixosConfigurations.container = nixpkgs.lib.nixosSystem {
+      # hydra configuration
+      nixosConfigurations.hydra = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./containers/container.nix # Point to the container config file
+          ./containers/hydra.nix # Point to the container config file
         ];
       };
     };

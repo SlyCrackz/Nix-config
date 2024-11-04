@@ -59,7 +59,7 @@
       };
 
       # caddy configuration
-      nixosConfigurations.caddy = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.ct-caddy-101 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           ./modules/container-base.nix # Point to the container config file

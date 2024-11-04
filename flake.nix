@@ -58,11 +58,11 @@
         };
       };
 
-      # hydra configuration
-      nixosConfigurations.hydra = nixpkgs.lib.nixosSystem {
+      # caddy configuration
+      nixosConfigurations.caddy = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./containers/hydra.nix # Point to the container config file
+          ./containers/caddy.nix # Point to the container config file
         ];
       };
     };

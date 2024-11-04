@@ -34,16 +34,22 @@ let
   };
 in
 {
-  # Define a post-activation script to copy the files to /root
+  # Define a post-activation script to copy the files to /root using rsync
   system.activationScripts.factorioFiles = {
     text = ''
+      # Ensure rsync is available
+      if ! command -v rsync &> /dev/null; then
+        echo "Installing rsync for use in activation script"
+        nix-env -iA nixpkgs.rsync
+      fi
+
       # Copy contents of Factorio headless server to /root/factorio without nesting
       mkdir -p /root/factorio
-      cp -r ${factorioHeadless}/factorio/* /root/factorio/
+      rsync -a ${factorioHeadless}/factorio/ /root/factorio/
 
       # Copy contents of Factorio Server Manager to /root/factorio-server-manager without nesting
       mkdir -p /root/factorio-server-manager
-      cp -r ${factorioManager}/factorio-server-manager/* /root/factorio-server-manager/
+      rsync -a ${factorioManager}/factorio-server-manager/ /root/factorio-server-manager/
     '';
   };
 

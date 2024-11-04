@@ -15,27 +15,19 @@
   # Enable SSH for remote access
   services.openssh.enable = true;
 
+  # we use opnsense
+  networking.firewall.enable = false;
+
   # Caddy service configuration
   services.caddy = {
-    enable = true;
-    package = pkgs.caddy;
-    extraConfig = ''
-      byteshift.cc {
-        reverse_proxy 10.0.1.106:80
-      }
+  enable = true;
+  virtualHosts."map.goldgrove.org".extraConfig = ''
+    reverse_proxy http://10.0.1.107:8080
+  '';
 
-      mc.byteshift.cc {
-        reverse_proxy 10.0.1.108:8080
-      }
-
-      goldgrove.org {
-        reverse_proxy 10.0.1.107:8100
-      }
-
-      map.goldgrove.org {
-        reverse_proxy 10.0.1.107:8080
-      }
-    '';
+  virtualHosts."goldgrove.org".extraConfig = ''
+    reverse_proxy http://10.0.1.107:8100
+  '';
   };
 
   system.stateVersion = "24.05";

@@ -6,7 +6,7 @@ let
     pname = "gokapi";
     version = "v1.9.2";
     src = pkgs.fetchurl {
-      url = "https://github.com/Forceu/Gokapi/releases/download/${version}/gokapi-linux_amd64";
+      url = "https://github.com/Forceu/Gokapi/releases/download/${version}/gokapi-linux_amd64.zip";
       sha256 = "bc79d7548ba6d1230e0038898210941c05ce87ea7b1704b812daefa6278175a2";
     };
     phases = [ "installPhase" ];

@@ -37,6 +37,7 @@
           ./modules/tailscale.nix
           ./modules/plasma.nix
         ];
+        config.sddmCustom.wallpaperPath = "/home/crackz/pictures/gruvbox-light-rainbow.png";
       };
 
       # Home Manager configuration

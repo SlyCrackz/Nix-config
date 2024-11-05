@@ -23,9 +23,20 @@
     };
 
     nixified-ai.url = "github:nixified-ai/flake";
+
+    nvchad-starter = {
+      url = "github:SlyCrackz/NvChad";
+      flake = false;
+    };
+    # NvChad for Nix
+    nvchad4nix = {
+      url = "github:nix-community/nix4nvchad";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nvchad-starter.follows = "nvchad-starter";
+    };
   };
 
-  outputs = { nixpkgs, unstablenixpkgs, home-manager, lanzaboote, nix-ld, nixified-ai, ... }:
+ outputs = { nixpkgs, unstablenixpkgs, home-manager, lanzaboote, nix-ld, nixified-ai, nvchad4nix, nvchad-starter, ... }:
     let
       # Define both stable and unstable packages
       unstablepkgs = unstablenixpkgs.legacyPackages.x86_64-linux;
@@ -63,9 +74,12 @@
           ./modules/home-modules/media-tools.nix
           ./modules/home-modules/gaming.nix
           ./modules/home-modules/yazi.nix
+	  ./modules/home-modules/nvchad.nix
         ];
         extraSpecialArgs = {
           unstablepkgs = unstablepkgs;
+	  nvchad4nix = nvchad4nix;
+	  nvchad-starter = nvchad-starter;
         };
       };
 

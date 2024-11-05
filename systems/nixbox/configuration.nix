@@ -8,6 +8,9 @@
   ];
   # Unfree packages
   nixpkgs.config.allowUnfree = true;
+  
+
+
 
   nixPackages.enableCorePackages = true;
   nixPackages.enableDesktopPackages = true;

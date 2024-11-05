@@ -21,9 +21,11 @@
       url = "github:Mic92/nix-ld";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixified-ai.url = "github:nixified-ai/flake";
   };
 
-  outputs = { nixpkgs, unstablenixpkgs, home-manager, lanzaboote, nix-ld, ... }:
+  outputs = { nixpkgs, unstablenixpkgs, home-manager, lanzaboote, nix-ld, nixified-ai, ... }:
     let
       # Define both stable and unstable packages
       unstablepkgs = unstablenixpkgs.legacyPackages.x86_64-linux;
@@ -39,10 +41,14 @@
           ./systems/nixbox/configuration.nix # Point to the NixOS system config file
           ./systems/nixbox/hardware-configuration.nix
           ./modules/packages.nix
+          ./modules/ai.nix
           ./modules/pipewire.nix
           ./modules/tailscale.nix
           ./modules/plasma.nix
         ];
+        specialArgs = {
+          nixified-ai = nixified-ai;
+        };
       };
 
       # Home Manager configuration

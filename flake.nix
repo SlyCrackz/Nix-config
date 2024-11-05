@@ -62,7 +62,8 @@
         system = "x86_64-linux";
         modules = [
           ./modules/container-base.nix # Point to the container config file
-          ./modules/services/caddy.nix
+          ./modules/packages.nix
+          ./containers/ct-caddy-101.nix
         ];
       };
 
@@ -71,7 +72,8 @@
         system = "x86_64-linux";
         modules = [
           ./modules/container-base.nix
-          ./modules/services/factorio-server.nix
+          ./modules/packages.nix
+          ./containers/ct-factorio-120.nix
         ];
       };
       
@@ -80,7 +82,8 @@
         system = "x86_64-linux";
         modules = [
           ./modules/container-base.nix
-          ./modules/services/hydra.nix
+          ./modules/packages.nix
+          ./containers/ct-hydra-110.nix
         ];
       };
     };

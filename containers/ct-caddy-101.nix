@@ -10,5 +10,7 @@
     reverse_proxy http://10.0.1.107:8100
   '';
   };
+
+  nixPackages.enableCorePackages = true;
 }
 

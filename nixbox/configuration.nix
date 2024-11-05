@@ -9,9 +9,9 @@
   # Unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  nixboxPackages.enableCorePackages = true;
-  nixboxPackages.enableDesktopPackages = true;
-  nixboxPackages.enableGamingPackages = true;
+  nixPackages.enableCorePackages = true;
+  nixPackages.enableDesktopPackages = true;
+  nixPackages.enableGamingPackages = true;
 
   # Persist Certain stuff
   systemd.tmpfiles.rules = [

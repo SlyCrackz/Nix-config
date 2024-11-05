@@ -74,7 +74,7 @@
         isNormalUser = true;
         createHome = true;
         initialHashedPassword = "\$6\$ZrQwhxOYvxQY8juy\$Agwgx/D2qvJdAKrdR9KgA/eVDyEO6mk5IZgDA220iCOmeoseDGhpchIKaZT1ZZRYHIMgOSdWaL4O2uV1napki0";
-        extraGroups = [ "wheel" ];
+        extraGroups = [ "wheel" "networkmanager" ];
         uid = 1000;
         shell = pkgs.zsh;
         home = "/home/crackz";
@@ -84,6 +84,8 @@
       };
     };
   };
+
+  networking.networkmanager.enable = true;
 
   time.hardwareClockInLocalTime = true;
   # System state version (DONT CHANGE!!!)

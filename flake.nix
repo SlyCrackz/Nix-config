@@ -75,6 +75,15 @@
           ./modules/services/factorio-server.nix
         ];
       };
+      
+      # hydra server
+      nixosConfigurations.ct-hydra-110 = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./modules/container-base.nix
+          ./modules/services/hydra.nix
+        ];
+      };
     };
 }
 

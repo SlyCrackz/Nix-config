@@ -30,8 +30,8 @@
         system = "x86_64-linux";
         modules = [
           lanzaboote.nixosModules.lanzaboote
-          ./nixbox/configuration.nix # Point to the NixOS system config file
-          ./nixbox/hardware-configuration.nix
+          ./systems/nixbox/configuration.nix # Point to the NixOS system config file
+          ./systems/nixbox/hardware-configuration.nix
           ./modules/packages.nix
           ./modules/pipewire.nix
           ./modules/tailscale.nix
@@ -44,13 +44,13 @@
         inherit pkgs;
         modules = [
           ./home-manager/home.nix # Point to the Home Manager config file
-          ./home-manager/git.nix
-          ./home-manager/shell.nix
+          ./modules/home-modules/git.nix
+          ./modules/home-modules/shell.nix
           ./home-manager/packages.nix
-          ./home-manager/terminal.nix
-          ./home-manager/media-tools.nix
-          ./home-manager/gaming.nix
-          ./home-manager/yazi.nix
+          ./modules/home-modules/sterminal.nix
+          ./modules/home-modules/media-tools.nix
+          ./modules/home-modules/gaming.nix
+          ./modules/home-modules/yazi.nix
         ];
         extraSpecialArgs = {
           unstablepkgs = unstablepkgs;
@@ -63,7 +63,7 @@
         modules = [
           ./modules/container-base.nix # Point to the container config file
           ./modules/packages.nix
-          ./containers/ct-caddy-101.nix
+          ./systems/ct-caddy-101.nix
         ];
       };
 
@@ -73,7 +73,7 @@
         modules = [
           ./modules/container-base.nix
           ./modules/packages.nix
-          ./containers/ct-factorio-120.nix
+          ./systems/ct-factorio-120.nix
         ];
       };
       
@@ -83,7 +83,7 @@
         modules = [
           ./modules/container-base.nix
           ./modules/packages.nix
-          ./containers/ct-hydra-110.nix
+          ./systems/ct-hydra-110.nix
         ];
       };
     };

@@ -32,12 +32,11 @@
           lanzaboote.nixosModules.lanzaboote
           ./nixbox/configuration.nix # Point to the NixOS system config file
           ./nixbox/hardware-configuration.nix
-          ./nixbox/packages.nix
+          ./modules/packages.nix
           ./modules/pipewire.nix
           ./modules/tailscale.nix
           ./modules/plasma.nix
         ];
-        config.sddmCustom.wallpaperPath = "/home/crackz/pictures/gruvbox-light-rainbow.png";
       };
 
       # Home Manager configuration

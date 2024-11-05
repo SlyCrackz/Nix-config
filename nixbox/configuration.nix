@@ -9,6 +9,11 @@
   # Unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  sddmCustom.wallpaperPath = "/home/crackz/pictures/gruvbox-light-rainbow.png";
+  nixboxPackages.enableCorePackages = true;
+  nixboxPackages.enableDesktopPackages = true;
+  nixboxPackages.enableGamingPackages = true;
+
   # Persist Certain stuff
   systemd.tmpfiles.rules = [
     "L /var/lib/tailscale - - - - /persist/var/lib/tailscale"

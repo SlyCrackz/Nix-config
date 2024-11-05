@@ -12,6 +12,7 @@
   nix.buildMachines = [
     {
       # Keep the current container hostname
+      hostName = "ct-hydra-110";
       system = "x86_64-linux"; # Target Linux only
       maxJobs = 8; # Adjust this to match your CPU core count
       speedFactor = 1.0;

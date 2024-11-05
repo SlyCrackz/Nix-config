@@ -98,6 +98,10 @@
   networking.hostId = "69413b8c";
   networking.hostName = "nixbox";
   networking.useDHCP = lib.mkDefault true;
+
+  hardware.bluetooth.enable = true; # enables support for Bluetooth
+  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+
   time.timeZone = lib.mkDefault "America/New_York";
   # Video drivers 
   services.xserver.videoDrivers = [ "intel" "nvidia" ];

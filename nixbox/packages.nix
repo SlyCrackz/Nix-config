@@ -17,6 +17,8 @@
     protontricks
     wl-clipboard
     wget
+    gcc
+    glibc
     xdotool
     xorg.xprop
     xorg.xwininfo

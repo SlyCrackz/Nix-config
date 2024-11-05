@@ -16,9 +16,14 @@
       url = "github:nix-community/home-manager?ref=release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-ld = {
+      url = "github:Mic92/nix-ld";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { nixpkgs, unstablenixpkgs, home-manager, lanzaboote, ... }:
+  outputs = { nixpkgs, unstablenixpkgs, home-manager, lanzaboote, nix-ld, ... }:
     let
       # Define both stable and unstable packages
       unstablepkgs = unstablenixpkgs.legacyPackages.x86_64-linux;
@@ -30,6 +35,7 @@
         system = "x86_64-linux";
         modules = [
           lanzaboote.nixosModules.lanzaboote
+          nix-ld.nixosModules.nix-ld
           ./systems/nixbox/configuration.nix # Point to the NixOS system config file
           ./systems/nixbox/hardware-configuration.nix
           ./modules/packages.nix
@@ -47,7 +53,7 @@
           ./modules/home-modules/git.nix
           ./modules/home-modules/shell.nix
           ./home-manager/packages.nix
-          ./modules/home-modules/sterminal.nix
+          ./modules/home-modules/terminal.nix
           ./modules/home-modules/media-tools.nix
           ./modules/home-modules/gaming.nix
           ./modules/home-modules/yazi.nix

@@ -69,7 +69,6 @@
     programs.gamemode.enable = config.nixPackages.enableGamingPackages;
 
     programs.zsh.enable = config.nixPackages.enableCorePackages;
-    programs.nix-ld.enable = config.nixPackages.enableCorePackages;
 
     # Enable dconf only if desktop packages are enabled
     programs.dconf.enable = config.nixPackages.enableDesktopPackages;

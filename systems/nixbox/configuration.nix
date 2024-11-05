@@ -12,7 +12,11 @@
   nixPackages.enableCorePackages = true;
   nixPackages.enableDesktopPackages = true;
   nixPackages.enableGamingPackages = true;
-
+  programs.nix-ld.dev = {
+    enable = true;
+    libraries = pkgs.steam-run.fhsenv.args.multiPkgs pkgs;
+  };
+  
   # Persist Certain stuff
   systemd.tmpfiles.rules = [
     "L /var/lib/tailscale - - - - /persist/var/lib/tailscale"

@@ -32,10 +32,7 @@
           lanzaboote.nixosModules.lanzaboote
           ./nixbox/configuration.nix # Point to the NixOS system config file
           ./nixbox/hardware-configuration.nix
-          ./nixbox/boot.nix
-          ./nixbox/network.nix
           ./nixbox/packages.nix
-          ./nixbox/services.nix
           ./modules/pipewire.nix
           ./modules/tailscale.nix
           ./modules/plasma.nix

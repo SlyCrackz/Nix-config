@@ -42,6 +42,26 @@
 
   environment.variables.EDITOR = "nvim";
 
+  # iPhone mounting
+  services.usbmuxd = {
+  enable = true;
+  package = pkgs.usbmuxd2;
+  };
+
+  services.thermald.enable = true;
+  # Terminal Lock
+  services.pcscd.enable = true;
+  # SSH configuration
+  services.openssh = {
+    enable = true;
+    settings.PermitRootLogin = "no";
+    settings.PasswordAuthentication = false;
+    hostKeys = [
+      { path = "/persist/etc/ssh/ssh_host_ed25519_key"; type = "ed25519"; }
+      { path = "/persist/etc/ssh/ssh_host_rsa_key"; type = "rsa"; bits = 4096; }
+    ];
+  };
+
   # User configuration
   users = {
     mutableUsers = false;
@@ -66,7 +86,7 @@
   };
 
   time.hardwareClockInLocalTime = true;
-  # System state version
+  # System state version (DONT CHANGE!!!)
   system.stateVersion = "21.11";
 }
 

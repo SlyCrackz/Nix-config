@@ -85,6 +85,10 @@
     };
   };
 
+  # autologin
+  services.displayManager.autoLogin.enable = true;
+  services.displayManager.autoLogin.user = "crackz";
+
   networking.networkmanager.enable = true;
 
   time.hardwareClockInLocalTime = true;

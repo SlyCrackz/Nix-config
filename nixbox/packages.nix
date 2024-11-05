@@ -8,6 +8,7 @@
     pulseaudio
     home-manager
     nh
+    file
     protonup-qt
     appimage-run
     unzip
@@ -38,5 +39,7 @@
   programs.steam.gamescopeSession.enable = true;
   programs.gamemode.enable = true;
 
-  programs.nix-ld.enable = true;
+  programs.nix-ld = {
+    enable = true;
+  };
 }

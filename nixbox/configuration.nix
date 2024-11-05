@@ -9,7 +9,6 @@
   # Unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  sddmCustom.wallpaperPath = "/home/crackz/pictures/gruvbox-light-rainbow.png";
   nixboxPackages.enableCorePackages = true;
   nixboxPackages.enableDesktopPackages = true;
   nixboxPackages.enableGamingPackages = true;

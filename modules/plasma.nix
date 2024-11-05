@@ -1,18 +1,14 @@
-{ pkgs, config, lib, ... }:
+{ pkgs, ... }:
 
 {
-  options = {
-    sddmCustom.wallpaperPath = lib.mkOption {
-      type = lib.types.str;
-      description = "Path to the wallpaper file for SDDM.";
-    };
-  };
-
   config = let
-    # Package the wallpaper from the provided path
+    # Fetch the wallpaper from the URL
     background-package = pkgs.stdenvNoCC.mkDerivation {
       name = "background-image";
-      src = config.sddmCustom.wallpaperPath;
+      src = pkgs.fetchurl {
+        url = "https://github.com/lunik1/nixos-logo-gruvbox-wallpaper/raw/master/png/gruvbox-light-rainbow.png";
+        sha256 = "cfaf892e6b4093789cc36f29b0c026a181fdc10e9f224aa8fccf298c1d3a0357";
+      };
       dontUnpack = true;
       installPhase = ''
         mkdir -p $out
@@ -49,3 +45,4 @@
     ];
   };
 }
+

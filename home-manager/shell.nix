@@ -8,7 +8,7 @@
       shellAliases = {
         nix = "nom";
         ff = "fastfetch";
-        t = "txr";
+        t = "zxr";
         lzg = "lazygit";
         lzd = "lazydocker";
         v = "nvim";

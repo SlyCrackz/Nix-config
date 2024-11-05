@@ -15,7 +15,7 @@
       hostName = "ct-hydra-110";
       system = "x86_64-linux"; # Target Linux only
       maxJobs = 8; # Adjust this to match your CPU core count
-      speedFactor = 1.0;
+      speedFactor = 1;
       supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
     }
   ];

@@ -1,19 +1,6 @@
 { pkgs, ... }:
 
 {
-  # Tailscale
-  services.tailscale.enable = true;
-  services.tailscale.useRoutingFeatures = "client";
-
-  # Audio (pipewire)
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    #jack.enable = true;
-  };
-
   # iPhone mounting
   services.usbmuxd = {
   enable = true;

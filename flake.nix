@@ -37,6 +37,8 @@
           ./nixbox/network.nix
           ./nixbox/packages.nix
           ./nixbox/services.nix
+          ./modules/pipewire.nix
+          ./modules/tailscale.nix
         ];
       };
 

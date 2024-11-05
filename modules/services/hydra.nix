@@ -6,5 +6,6 @@
     buildMachinesFiles = []; # Avoids using a non-existent /etc/nix/machines file
     useSubstitutes = true; # Speeds up builds by using binary caches
   };
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 }
 

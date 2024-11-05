@@ -6,7 +6,6 @@
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
       shellAliases = {
-        nix = "nom";
         ff = "fastfetch";
         t = "zxr";
         lzg = "lazygit";

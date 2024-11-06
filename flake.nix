@@ -37,6 +37,7 @@
       unstablepkgs = unstablenixpkgs.legacyPackages.x86_64-linux;
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
       darwinPkgs = nixpkgs.legacyPackages.aarch64-darwin;
+      unstableDarwinPkgs = unstablenixpkgs.legacyPackages.aarch64-darwin;
     in
     {
       # NixOS system configuration
@@ -98,7 +99,13 @@
             ./home-manager/mac.nix
             ./home-manager/packages.nix
             ./modules/home-modules/git.nix
-          ];
+            ./modules/home-modules/nvchad.nix
+          ];          
+          extraSpecialArgs = {
+            unstablepkgs = unstablenixpkgs.legacyPackages.aarch64-darwin;
+            nvchad4nix = nvchad4nix;
+            nvchad-starter = nvchad-starter;
+          };
         };
       };
 

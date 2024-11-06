@@ -4,7 +4,6 @@
   nixpkgs.config.allowUnfree = true;
 
   home.packages = [
-    pkgs.firefox
     pkgs.gnupg
     pkgs.pass
     pkgs.cava

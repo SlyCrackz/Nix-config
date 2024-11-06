@@ -34,9 +34,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.nvchad-starter.follows = "nvchad-starter";
     };
+
+    #nix-darwin
+    darwin.url = "github:LnL7/nix-darwin";
   };
 
- outputs = { nixpkgs, unstablenixpkgs, home-manager, lanzaboote, nix-ld, nixified-ai, nvchad4nix, nvchad-starter, ... }:
+ outputs = { nixpkgs, unstablenixpkgs, home-manager, lanzaboote, nix-ld, nixified-ai, nvchad4nix, nvchad-starter, darwin, ... }:
     let
       # Define both stable and unstable packages
       unstablepkgs = unstablenixpkgs.legacyPackages.x86_64-linux;
@@ -63,13 +66,12 @@
         };
       };
 
-      
       # macOS configuration
-      darwinConfigurations.macbook = { config, ... }: {
-        imports = [
+      darwinConfigurations.macbook = darwin.lib.darwinSystem {
+        system = "x86_64-darwin";
+        modules = [
           ./systems/macbook.nix # Reference the macOS system config file
         ];
-        # Additional macOS-specific settings can go here
       };
 
       # Home Manager configuration

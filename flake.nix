@@ -44,7 +44,7 @@
       # Define both stable and unstable packages
       unstablepkgs = unstablenixpkgs.legacyPackages.x86_64-linux;
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
-      darwinPkgs = nixpkgs.legacyPackages.x86_64-darwin; # Add Darwin packages for macOS
+      darwinPkgs = nixpkgs.legacyPackages.aarch64-darwin; # Add Darwin packages for macOS
     in
     {
       # NixOS system configuration
@@ -68,7 +68,7 @@
 
       # macOS configuration
       darwinConfigurations.macbook = darwin.lib.darwinSystem {
-        system = "x86_64-darwin";
+        system = "aarch64-darwin";
         modules = [
           ./systems/macbook.nix # Reference the macOS system config file
         ];

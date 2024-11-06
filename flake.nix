@@ -97,7 +97,6 @@
             ./home-manager/home.nix
             ./home-manager/mac.nix
             ./home-manager/packages.nix
-            ./modules/home-modules/nvchad.nix
             ./modules/home-modules/git.nix
           ];
         };

@@ -18,8 +18,6 @@
     pkgs.tree
     pkgs.ripgrep
     pkgs.cmatrix
-    pkgs.jetbrains.idea-community-bin
     pkgs.obsidian
-    pkgs.zulu
   ];
 }

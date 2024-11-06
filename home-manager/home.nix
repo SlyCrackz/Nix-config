@@ -2,11 +2,6 @@
 
 {
   home.username = "crackz";
-  home.homeDirectory = "/home/crackz";
-  home.sessionPath = [
-    "/home/crackz/.local/bin/"
-  ];
-
 
   # Enabling Flakes
   nix = {

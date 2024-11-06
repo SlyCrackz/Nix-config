@@ -20,7 +20,6 @@
     pkgs.cmatrix
     pkgs.jetbrains.idea-community-bin
     pkgs.obsidian
-    #unstablepkgs.neovim
     pkgs.zulu
   ];
 }

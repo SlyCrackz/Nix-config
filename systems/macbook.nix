@@ -8,7 +8,6 @@
 
   environment.systemPackages = with pkgs; [
     htop
-    git
   ];
 
   services.nix-daemon.enable = true;

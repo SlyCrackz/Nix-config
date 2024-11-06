@@ -81,6 +81,7 @@
             ./modules/home-modules/gaming.nix
             ./modules/home-modules/yazi.nix
             ./modules/home-modules/nvchad.nix
+            ./modules/home-modules/java.nix
           ];
           extraSpecialArgs = {
             unstablepkgs = unstablenixpkgs.legacyPackages.x86_64-linux;
@@ -95,6 +96,8 @@
           modules = [
             ./home-manager/home.nix
             ./home-manager/mac.nix
+            ./home-manager/packages.nix
+            ./modules/home-modules/nvchad.nix
             ./modules/home-modules/git.nix
           ];
         };

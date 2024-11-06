@@ -9,4 +9,7 @@
   environment.systemPackages = with pkgs; [
     htop
   ];
+
+  # NO TOUCHY
+  system.stateVersion = 5;
 }

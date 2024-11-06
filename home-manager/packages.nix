@@ -6,7 +6,6 @@
   home.packages = [
     pkgs.gnupg
     pkgs.pass
-    pkgs.cava
     pkgs.jq
     pkgs.vesktop
     pkgs.zellij

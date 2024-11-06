@@ -7,5 +7,6 @@
   ];
   home.packages = [
     pkgs.firefox
+    pkgs.cava
   ];
 }

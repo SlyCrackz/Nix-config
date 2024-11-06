@@ -10,6 +10,8 @@
     htop
   ];
 
+  nixPackages.enableCorePackages = true;
+  
   services.nix-daemon.enable = true;
 
   # NO TOUCHY

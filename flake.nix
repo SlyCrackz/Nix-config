@@ -64,6 +64,7 @@
         system = "aarch64-darwin";
         modules = [
           ./systems/M1Air.nix
+          ./modules/packages.nix
         ];
       };
 

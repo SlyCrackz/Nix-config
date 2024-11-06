@@ -41,6 +41,7 @@
       # Define both stable and unstable packages
       unstablepkgs = unstablenixpkgs.legacyPackages.x86_64-linux;
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      darwinPkgs = nixpkgs.legacyPackages.x86_64-darwin; # Add Darwin packages for macOS
     in
     {
       # NixOS system configuration
@@ -60,6 +61,15 @@
         specialArgs = {
           nixified-ai = nixified-ai;
         };
+      };
+
+      
+      # macOS configuration
+      darwinConfigurations.macbook = { config, ... }: {
+        imports = [
+          ./systems/macbook.nix # Reference the macOS system config file
+        ];
+        # Additional macOS-specific settings can go here
       };
 
       # Home Manager configuration

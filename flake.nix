@@ -63,7 +63,7 @@
       darwinConfigurations."M1Air" = darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = [
-          ./systems/macbook.nix
+          ./systems/M1Air.nix
         ];
       };
 

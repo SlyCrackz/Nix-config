@@ -8,7 +8,10 @@
 
   environment.systemPackages = with pkgs; [
     htop
+    git
   ];
+
+  services.nix-daemon.enable = true;
 
   # NO TOUCHY
   system.stateVersion = 5;

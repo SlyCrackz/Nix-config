@@ -15,6 +15,9 @@
     FLAKE = "/Users/crackz/Public/Nix-config";
   };
 
+  networking.hostname = "M1Air";
+  networking.localHostname = "M1Air"
+
   # Fonts
   fonts.packages = with pkgs; [
     noto-fonts-emoji

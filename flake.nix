@@ -61,10 +61,10 @@
       };
 
       # macOS system configuration
-      darwinConfigurations."M1Air" = darwin.lib.darwinSystem {
+      darwinConfigurations."m1air" = darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = [
-          ./systems/M1Air.nix
+          ./systems/m1air.nix
           ./modules/packages/core.nix
         ];
       };
@@ -94,7 +94,7 @@
         };
 
         # Minimal macOS configuration on MacBookAir
-        "crackz@M1Air" = home-manager.lib.homeManagerConfiguration {
+        "crackz@m1air" = home-manager.lib.homeManagerConfiguration {
           pkgs = darwinPkgs;
           modules = [
             ./home-manager/home.nix

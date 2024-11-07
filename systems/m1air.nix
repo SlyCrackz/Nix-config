@@ -44,6 +44,16 @@
     NSGlobalDomain.KeyRepeat = 2;
   };
 
+  # Enable key remapping and define the Caps Lock <-> Escape swap
+  system.keyboard.enableKeyMapping = true;
+  system.keyboard.userKeyMapping = [
+    # Map Caps Lock to Escape
+    { HIDKeyboardModifierMappingSrc = 30064771129; HIDKeyboardModifierMappingDst = 30064771113; }
+
+    # Map Escape to Caps Lock
+    { HIDKeyboardModifierMappingSrc = 30064771113; HIDKeyboardModifierMappingDst = 30064771129; }
+  ];
+
   # Necessary for using flakes on this system.
   nix.settings.experimental-features = "nix-command flakes";
 

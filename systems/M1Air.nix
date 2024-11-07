@@ -16,7 +16,7 @@
   };
 
   networking.hostname = "M1Air";
-  networking.localHostname = "M1Air"
+  networking.localHostname = "M1Air";
 
   # Fonts
   fonts.packages = with pkgs; [

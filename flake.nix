@@ -102,6 +102,7 @@
             ./home-manager/packages.nix
             ./modules/home-modules/git.nix
             ./modules/home-modules/nvchad.nix
+            ./modules/home-modules/kitty.nix
           ];
           extraSpecialArgs = {
             unstablepkgs = unstableDarwinPkgs;

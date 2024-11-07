@@ -9,9 +9,9 @@
     file
     unzip
     unrar
-    cargo
-    rustc
     wget
+    rustup #we want to move to nixshells but nvim doesnt like NOT having these
+    clang # read above ^
   ];
 }
 

@@ -15,7 +15,7 @@
     FLAKE = "/Users/crackz/Public/Nix-config";
   };
 
-  networking.hostname = "M1Air";
+  networking.hostName = "M1Air";
   networking.localHostname = "M1Air";
 
   # Fonts

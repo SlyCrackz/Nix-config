@@ -10,7 +10,18 @@
   '';
 
   environment.systemPackages = [ pkgs.home-manager ];
-  
+ 
+  environment.variables = {
+    FLAKE = "/Users/crackz/Public/Nix-config";
+  };
+
+  # Fonts
+  fonts.packages = with pkgs; [
+    noto-fonts-emoji
+    intel-one-mono
+    (nerdfonts.override { fonts = [ "IntelOneMono" ]; })
+  ];
+
   services.nix-daemon.enable = true;
 
   # NO TOUCHY

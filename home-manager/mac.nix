@@ -1,3 +1,5 @@
+{ lib, config, pkgs, ... }:
+
 {
   home.homeDirectory = "/Users/crackz";
   # make gui apps searchable by spotlight

@@ -14,5 +14,8 @@
       ${pkgs.rsync}/bin/rsync $rsyncArgs "$apps_source/" "$app_target"
     '';
   };
+  # rust is borked with nix and darwin. this fixes. libiconv bullshit
+  # See this issue: https://github.com/nix-community/home-manager/issues/3482
+  home.sessionVariables.LIBRARY_PATH = ''${lib.makeLibraryPath [pkgs.libiconv]}''${LIBRARY_PATH:+:$LIBRARY_PATH}'';
 }
 

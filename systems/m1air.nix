@@ -15,7 +15,9 @@
     ${pkgs.rsync}/bin/rsync $rsyncArgs "$apps_source/" "$app_target"
   '';
 
-  environment.systemPackages = [ pkgs.home-manager ];
+  environment.systemPackages = [ 
+  pkgs.home-manager
+  ];
 
   environment.variables = {
     FLAKE = "/Users/crackz/Public/Nix-config";

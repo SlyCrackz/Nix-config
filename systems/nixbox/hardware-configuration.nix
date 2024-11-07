@@ -46,11 +46,11 @@
     autoScrub.enable = true;
     autoSnapshot = {
       enable = true;
-      frequent = 4;   # Keep the last 4 frequent snapshots
-      hourly = 12;    # Keep the last 12 hourly snapshots
-      daily = 7;      # Keep the last 7 daily snapshots
-      weekly = 4;     # Keep the last 4 weekly snapshots
-      monthly = 2;    # Keep the last 2 monthly snapshots
+      frequent = 4; # Keep the last 4 frequent snapshots
+      hourly = 12; # Keep the last 12 hourly snapshots
+      daily = 7; # Keep the last 7 daily snapshots
+      weekly = 4; # Keep the last 4 weekly snapshots
+      monthly = 2; # Keep the last 2 monthly snapshots
     };
   };
 
@@ -105,7 +105,7 @@
   time.timeZone = lib.mkDefault "America/New_York";
   # Video drivers 
   services.xserver.videoDrivers = [ "intel" "nvidia" ];
-  
+
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   hardware.opengl.enable = true;

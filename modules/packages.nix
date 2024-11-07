@@ -21,56 +21,57 @@
     };
   };
 
-  config = let
-    # Core Packages - available on all systems
-    corePackages = lib.optionals config.nixPackages.enableCorePackages (with pkgs; [
-      fastfetch
-      btop
-      nh
-      file
-      unzip
-      unrar
-      nix-output-monitor
-      nvd
-      wget
-    ]);
+  config =
+    let
+      # Core Packages - available on all systems
+      corePackages = lib.optionals config.nixPackages.enableCorePackages (with pkgs; [
+        fastfetch
+        btop
+        nh
+        file
+        unzip
+        unrar
+        nix-output-monitor
+        nvd
+        wget
+      ]);
 
-    # Desktop Packages - specific to desktop and laptop setups
-    desktopPackages = lib.optionals config.nixPackages.enableDesktopPackages (with pkgs; [
-      wl-clipboard
-      xdotool
-      xorg.xprop
-      xorg.xwininfo
-      unixtools.xxd
-      libimobiledevice  # iPhone mounting
-      ifuse             # iPhone mounting
-      icu
-      sbctl             # lanzaboote
-      home-manager
-      pulseaudio
-    ]);
+      # Desktop Packages - specific to desktop and laptop setups
+      desktopPackages = lib.optionals config.nixPackages.enableDesktopPackages (with pkgs; [
+        wl-clipboard
+        xdotool
+        xorg.xprop
+        xorg.xwininfo
+        unixtools.xxd
+        libimobiledevice # iPhone mounting
+        ifuse # iPhone mounting
+        icu
+        sbctl # lanzaboote
+        home-manager
+        pulseaudio
+      ]);
 
-    # Gaming Packages - only for gaming setups (e.g., desktop)
-    gamingPackages = lib.optionals config.nixPackages.enableGamingPackages (with pkgs; [
-      mangohud
-      protontricks
-      protonup-qt
-      appimage-run
-      yad
-    ]);
-  in
-  {
-    # Combine selected packages based on the enabled groups
-    environment.systemPackages = corePackages ++ desktopPackages ++ gamingPackages;
+      # Gaming Packages - only for gaming setups (e.g., desktop)
+      gamingPackages = lib.optionals config.nixPackages.enableGamingPackages (with pkgs; [
+        mangohud
+        protontricks
+        protonup-qt
+        appimage-run
+        yad
+      ]);
+    in
+    {
+      # Combine selected packages based on the enabled groups
+      environment.systemPackages = corePackages ++ desktopPackages ++ gamingPackages;
 
-    # Enable Steam and related gaming settings only if gaming packages are enabled
-    programs.steam.enable = config.nixPackages.enableGamingPackages;
-    programs.steam.gamescopeSession.enable = config.nixPackages.enableGamingPackages;
-    programs.gamemode.enable = config.nixPackages.enableGamingPackages;
+      # Enable Steam and related gaming settings only if gaming packages are enabled
+      programs.steam.enable = config.nixPackages.enableGamingPackages;
+      programs.steam.gamescopeSession.enable = config.nixPackages.enableGamingPackages;
+      programs.gamemode.enable = config.nixPackages.enableGamingPackages;
 
-    programs.zsh.enable = config.nixPackages.enableCorePackages;
+      programs.zsh.enable = config.nixPackages.enableCorePackages;
 
-    # Enable dconf only if desktop packages are enabled
-    programs.dconf.enable = config.nixPackages.enableDesktopPackages;
-  };
+      # Enable dconf only if desktop packages are enabled
+      programs.dconf.enable = config.nixPackages.enableDesktopPackages;
+    };
 }

@@ -102,7 +102,7 @@
             ./home-manager/packages.nix
             ./modules/home-modules/git.nix
             ./modules/home-modules/nvchad.nix
-          ];          
+          ];
           extraSpecialArgs = {
             unstablepkgs = unstablenixpkgs.legacyPackages.aarch64-darwin;
             nvchad4nix = nvchad4nix;

@@ -8,17 +8,17 @@
   ];
   # Unfree packages
   nixpkgs.config.allowUnfree = true;
-  
+
 
   environment.systemPackages = [
-  pkgs.home-manager
+    pkgs.home-manager
   ];
 
   programs.nix-ld.dev = {
     enable = true;
     libraries = pkgs.steam-run.fhsenv.args.multiPkgs pkgs;
   };
-  
+
   # Persist Certain stuff
   systemd.tmpfiles.rules = [
     "L /var/lib/tailscale - - - - /persist/var/lib/tailscale"
@@ -54,8 +54,8 @@
 
   # iPhone mounting
   services.usbmuxd = {
-  enable = true;
-  package = pkgs.usbmuxd2;
+    enable = true;
+    package = pkgs.usbmuxd2;
   };
 
   services.thermald.enable = true;

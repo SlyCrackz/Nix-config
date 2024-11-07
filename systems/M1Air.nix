@@ -10,14 +10,14 @@
   '';
 
   environment.systemPackages = [ pkgs.home-manager ];
- 
+
   environment.variables = {
     FLAKE = "/Users/crackz/Public/Nix-config";
   };
 
   networking.hostName = "M1Air";
   networking.localHostName = "M1Air";
-  
+
   # Fonts
   fonts.packages = with pkgs; [
     noto-fonts-emoji

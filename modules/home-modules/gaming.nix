@@ -2,6 +2,6 @@
 
 {
   home.packages = [
-  unstablepkgs.path-of-building
+    unstablepkgs.path-of-building
   ];
 }

@@ -9,7 +9,7 @@
     extraPackages = with pkgs; [
       # Add any additional language servers or tools for NvChad
       pkgs.nodePackages.bash-language-server
-      (pkgs.python3.withPackages(ps: with ps; [ ps.python-lsp-server ps.flake8 ]))
+      (pkgs.python3.withPackages (ps: with ps; [ ps.python-lsp-server ps.flake8 ]))
     ];
     hm-activation = true;
     backup = true;

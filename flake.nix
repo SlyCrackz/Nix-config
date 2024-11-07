@@ -12,10 +12,6 @@
       url = "github:nix-community/home-manager?ref=release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-ld = {
-      url = "github:Mic92/nix-ld";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nixified-ai.url = "github:nixified-ai/flake";
     nvchad-starter = {
       url = "github:SlyCrackz/NvChad";
@@ -32,7 +28,7 @@
     };
   };
 
-  outputs = { nixpkgs, unstablenixpkgs, home-manager, lanzaboote, nix-ld, nixified-ai, nvchad4nix, nvchad-starter, darwin, ... }:
+  outputs = { nixpkgs, unstablenixpkgs, home-manager, lanzaboote, nixified-ai, nvchad4nix, nvchad-starter, darwin, ... }:
     let
       unstablePkgs = unstablenixpkgs.legacyPackages.x86_64-linux;
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
@@ -45,7 +41,6 @@
         system = "x86_64-linux";
         modules = [
           lanzaboote.nixosModules.lanzaboote
-          nix-ld.nixosModules.nix-ld
           ./systems/nixbox/configuration.nix
           ./systems/nixbox/hardware-configuration.nix
           ./modules/packages/core.nix

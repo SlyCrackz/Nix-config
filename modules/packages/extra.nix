@@ -17,6 +17,9 @@
     protonup-qt
     appimage-run
     yad
+    nix-output-monitor
+    nvd
+    nh
   ];
 
     # Enable Steam and related gaming settings only if gaming packages are enabled

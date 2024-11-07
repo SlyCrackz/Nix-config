@@ -10,7 +10,9 @@
   nixpkgs.config.allowUnfree = true;
   
 
-  environment.systemPackages = [ pkgs.home-manager ];
+  environment.systemPackages = [
+  pkgs.home-manager
+  ];
 
   programs.nix-ld.dev = {
     enable = true;

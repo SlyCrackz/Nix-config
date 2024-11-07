@@ -6,12 +6,11 @@
     # Core tools for all systems
     fastfetch
     btop
-    nh
     file
     unzip
     unrar
-    nix-output-monitor
-    nvd
+    cargo
+    rustc
     wget
   ];
 }

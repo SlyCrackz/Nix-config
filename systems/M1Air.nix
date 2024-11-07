@@ -17,7 +17,7 @@
 
   networking.hostName = "M1Air";
   networking.localHostName = "M1Air";
-
+  
   # Fonts
   fonts.packages = with pkgs; [
     noto-fonts-emoji

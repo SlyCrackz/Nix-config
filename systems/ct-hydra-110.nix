@@ -7,7 +7,6 @@
     useSubstitutes = true; # Speeds up builds by using binary caches
   };
 
-  nixPackages.enableCorePackages = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   nix.buildMachines = [

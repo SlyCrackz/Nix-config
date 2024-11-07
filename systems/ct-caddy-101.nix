@@ -11,6 +11,5 @@
   '';
   };
 
-  nixPackages.enableCorePackages = true;
 }
 

@@ -6,11 +6,7 @@
     experimental-features = nix-command flakes
   '';
 
-  environment.systemPackages = with pkgs; [
-    htop
-  ];
-
-  nixPackages.enableCorePackages = true;
+  environment.systemPackages = [ pkgs.home-manager ];
   
   services.nix-daemon.enable = true;
 

@@ -48,7 +48,8 @@
           nix-ld.nixosModules.nix-ld
           ./systems/nixbox/configuration.nix
           ./systems/nixbox/hardware-configuration.nix
-          ./modules/packages.nix
+          ./modules/packages/core.nix
+          ./modules/packages/extra.nix
           ./modules/ai.nix
           ./modules/pipewire.nix
           ./modules/tailscale.nix
@@ -64,7 +65,7 @@
         system = "aarch64-darwin";
         modules = [
           ./systems/M1Air.nix
-          ./modules/packages.nix
+          ./modules/packages/core.nix
         ];
       };
 
@@ -115,7 +116,7 @@
         system = "x86_64-linux";
         modules = [
           ./modules/container-base.nix
-          ./modules/packages.nix
+          ./modules/packages/core.nix
           ./systems/ct-caddy-101.nix
         ];
       };
@@ -125,7 +126,7 @@
         system = "x86_64-linux";
         modules = [
           ./modules/container-base.nix
-          ./modules/packages.nix
+          ./modules/packages/core.nix
           ./systems/ct-factorio-120.nix
         ];
       };
@@ -135,7 +136,7 @@
         system = "x86_64-linux";
         modules = [
           ./modules/container-base.nix
-          ./modules/packages.nix
+          ./modules/packages/core.nix
           ./systems/ct-hydra-110.nix
         ];
       };

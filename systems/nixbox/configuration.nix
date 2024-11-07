@@ -10,11 +10,8 @@
   nixpkgs.config.allowUnfree = true;
   
 
+  environment.systemPackages = [ pkgs.home-manager ];
 
-
-  nixPackages.enableCorePackages = true;
-  nixPackages.enableDesktopPackages = true;
-  nixPackages.enableGamingPackages = true;
   programs.nix-ld.dev = {
     enable = true;
     libraries = pkgs.steam-run.fhsenv.args.multiPkgs pkgs;

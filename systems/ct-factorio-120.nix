@@ -45,7 +45,6 @@ in
     '';
   };
 
-  nixPackages.enableCorePackages = true;
   nixpkgs.config.allowUnfree = true;
   # Add `steam` package for compatibility runtime
   environment.systemPackages = [

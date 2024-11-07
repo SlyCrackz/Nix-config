@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, config, ... }:
 
 {
   # Unfree packages
@@ -13,11 +13,6 @@
     app_target="$app_target_base/$moniker"
     mkdir -p "$app_target"
     ${pkgs.rsync}/bin/rsync $rsyncArgs "$apps_source/" "$app_target"
-  '';
-
-  # Enables Nix flakes and nix-command support
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes
   '';
 
   environment.systemPackages = [ pkgs.home-manager ];
@@ -35,6 +30,20 @@
     intel-one-mono
     (nerdfonts.override { fonts = [ "IntelOneMono" ]; })
   ];
+
+  system.defaults = {
+    dock.autohide = true;
+    dock.persistent-apps = [
+      "/Applications/Safari.app"
+    ];
+    finder.FXPreferredViewStyle = "clmv";
+    loginwindow.GuestEnabled = false;
+    NSGlobalDomain.AppleInterfaceStyle = "Dark";
+    NSGlobalDomain.KeyRepeat = 2;
+  };
+
+  # Necessary for using flakes on this system.
+  nix.settings.experimental-features = "nix-command flakes";
 
   services.nix-daemon.enable = true;
 

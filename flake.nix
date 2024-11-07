@@ -98,6 +98,8 @@
             ./modules/home-modules/git.nix
             ./modules/home-modules/nvchad.nix
             ./modules/home-modules/kitty.nix
+            ./modules/home-modules/shell.nix
+            ./modules/home-modules/yazi.nix
           ];
           extraSpecialArgs = {
             unstablepkgs = unstableDarwinPkgs;

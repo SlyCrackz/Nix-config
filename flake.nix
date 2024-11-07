@@ -34,7 +34,7 @@
 
   outputs = { nixpkgs, unstablenixpkgs, home-manager, lanzaboote, nix-ld, nixified-ai, nvchad4nix, nvchad-starter, darwin, ... }:
     let
-      unstablepkgs = unstablenixpkgs.legacyPackages.x86_64-linux;
+      unstablePkgs = unstablenixpkgs.legacyPackages.x86_64-linux;
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
       darwinPkgs = nixpkgs.legacyPackages.aarch64-darwin;
       unstableDarwinPkgs = unstablenixpkgs.legacyPackages.aarch64-darwin;
@@ -72,14 +72,14 @@
       # Home Manager configurations
       homeConfigurations = {
         "crackz" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          pkgs = pkgs;
           modules = [
             ./home-manager/home.nix
             ./home-manager/linux.nix
             ./modules/home-modules/git.nix
             ./modules/home-modules/shell.nix
             ./home-manager/packages.nix
-            ./modules/home-modules/terminal.nix
+            ./modules/home-modules/foot.nix
             ./modules/home-modules/media-tools.nix
             ./modules/home-modules/gaming.nix
             ./modules/home-modules/yazi.nix
@@ -87,7 +87,7 @@
             ./modules/home-modules/java.nix
           ];
           extraSpecialArgs = {
-            unstablepkgs = unstablenixpkgs.legacyPackages.x86_64-linux;
+            unstablepkgs = unstablePkgs;
             nvchad4nix = nvchad4nix;
             nvchad-starter = nvchad-starter;
           };
@@ -95,7 +95,7 @@
 
         # Minimal macOS configuration on MacBookAir
         "crackz@M1Air" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+          pkgs = darwinPkgs;
           modules = [
             ./home-manager/home.nix
             ./home-manager/mac.nix
@@ -104,7 +104,7 @@
             ./modules/home-modules/nvchad.nix
           ];
           extraSpecialArgs = {
-            unstablepkgs = unstablenixpkgs.legacyPackages.aarch64-darwin;
+            unstablepkgs = unstableDarwinPkgs;
             nvchad4nix = nvchad4nix;
             nvchad-starter = nvchad-starter;
           };

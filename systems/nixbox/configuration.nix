@@ -84,7 +84,7 @@
         shell = pkgs.zsh;
         home = "/home/crackz";
         openssh.authorizedKeys.keys = [
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGOdrT0hVW1T5MksKlo6R3Ari7ZNO+LNsq6af5SLze8P crackz@m1air"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICdcEigBJBlmbmhupd9x35uzDIN+3INROp6QR8hpxjX6 crackz@m1air"
         ];
       };
     };

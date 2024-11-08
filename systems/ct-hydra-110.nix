@@ -6,11 +6,11 @@
     buildMachinesFiles = [ ]; # Avoids using a non-existent /etc/nix/machines file
     useSubstitutes = false; # No external substitutes to ensure full-source builds
 
-    # Extra Hydra settings for debugging, logging, and performance
-    extraConfig = {
-      logging.level = "debug"; # Enable detailed logging
-      log_rotation = true; # Rotate logs to prevent excessive log growth
-    };
+    # Extra Hydra settings as a concatenated string
+    extraConfig = ''
+      logging.level = debug
+      log_rotation = true
+    '';
   };
 
   nix.settings = {

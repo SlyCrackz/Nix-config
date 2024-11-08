@@ -85,7 +85,7 @@
         isNormalUser = true;
         createHome = true;
         initialHashedPassword = "\$6\$ZrQwhxOYvxQY8juy\$Agwgx/D2qvJdAKrdR9KgA/eVDyEO6mk5IZgDA220iCOmeoseDGhpchIKaZT1ZZRYHIMgOSdWaL4O2uV1napki0";
-        extraGroups = [ "wheel" "networkmanager" ];
+        extraGroups = [ "wheel" "networkmanager" "plugdev" ];
         uid = 1000;
         shell = pkgs.zsh;
         home = "/home/crackz";

@@ -11,6 +11,7 @@
     sbctl
     wl-clipboard
     solaar
+    veracrypt
 
     # Gaming-related tools (these will be included on systems where applicable)
     mangohud

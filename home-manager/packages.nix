@@ -17,5 +17,6 @@
     pkgs.ripgrep
     pkgs.cmatrix
     pkgs.obsidian
+    pkgs.veracrypt
   ];
 }

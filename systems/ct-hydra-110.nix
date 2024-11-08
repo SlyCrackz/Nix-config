@@ -17,7 +17,7 @@
     experimental-features = [ "nix-command" "flakes" ];
     build-cores = 0; # Automatically uses all available cores
     eval-cache = true; # Enable local evaluation cache to speed up repeated evaluations
-    substituters = ""; # Ensure no external substituters
+    substituters = []; # Set to an empty list to disable all external substituters
     keep-outputs = true; # Avoids deleting outputs during builds, useful for debugging
     keep-derivations = true; # Keep derivations for more efficient garbage collection
   };

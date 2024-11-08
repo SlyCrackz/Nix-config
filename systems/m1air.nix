@@ -22,6 +22,13 @@
   environment.variables = {
     FLAKE = "/Users/crackz/Public/Nix-config";
   };
+  # Enable Homebrew in nix-darwin ---- STILL NEED TO INSTALL BREW MANUALLY/FIGURE OUT A FLAKE FOR IT
+  homebrew = {
+    enable = true;
+
+    # Specify casks (GUI applications) to be installed by Homebrew
+    casks = [ "logi-options-plus" ];
+  };
 
   networking.hostName = "m1air";
   networking.localHostName = "m1air";

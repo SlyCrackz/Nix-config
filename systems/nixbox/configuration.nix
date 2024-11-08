@@ -20,6 +20,12 @@
     "L /etc/secureboot - - - - /persist/etc/secureboot"
   ];
 
+  fileSystems."/var/lib/bluetooth" = {
+    device = "/persist/var/lib/bluetooth";
+    options = [ "bind" "noauto" "x-systemd.automount" ];
+    noCheck = true;
+  };
+
   nix.settings.extra-experimental-features = [ "nix-command" "flakes" ];
 
   # Other system services

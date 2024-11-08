@@ -10,9 +10,11 @@
 
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
-    allow-unfree = true; # Enable unfree packages globally
     build-cores = 0; # Automatically uses all available cores
   };
+
+
+  nixpkgs.config.allowUnfree = true;
 
   nix.buildMachines = [
     {

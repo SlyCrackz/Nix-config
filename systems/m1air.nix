@@ -27,7 +27,10 @@
     enable = true;
 
     # Specify casks (GUI applications) to be installed by Homebrew
-    casks = [ "logi-options-plus" ];
+    casks = [ 
+    "logi-options-plus"
+    "veracrypt"
+    ];
   };
 
   networking.hostName = "m1air";

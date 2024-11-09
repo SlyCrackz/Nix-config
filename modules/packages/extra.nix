@@ -10,6 +10,7 @@
     icu
     sbctl
     wl-clipboard
+    adoptopenjdk-icedtea-web
     solaar
 
     # Gaming-related tools (these will be included on systems where applicable)

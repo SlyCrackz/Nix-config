@@ -39,6 +39,7 @@
       # NixOS system configuration
       nixosConfigurations.nixbox = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        pkgs = pkgs;
         modules = [
           lanzaboote.nixosModules.lanzaboote
           ./systems/nixbox/configuration.nix
@@ -142,6 +143,7 @@
       # Hydra server configuration
       nixosConfigurations.template-nixos = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        pkgs = pkgs;
         modules = [
           ./modules/container-base.nix
         ];

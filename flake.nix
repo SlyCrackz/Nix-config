@@ -138,5 +138,13 @@
           ./systems/ct-hydra-110.nix
         ];
       };
+
+      # Hydra server configuration
+      nixosConfigurations.template-nixos = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./modules/container-base.nix
+        ];
+      };
     };
 }

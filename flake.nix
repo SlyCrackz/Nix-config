@@ -39,10 +39,6 @@
       # NixOS system configuration
       nixosConfigurations.nixbox = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        pkgs = pkgs;
-        config = {
-          allowUnfree = true;
-        };
         modules = [
           lanzaboote.nixosModules.lanzaboote
           ./systems/nixbox/configuration.nix
@@ -71,7 +67,7 @@
       # Home Manager configurations
       homeConfigurations = {
         "crackz" = home-manager.lib.homeManagerConfiguration {
-          pkgs = pkgs;
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
           modules = [
             ./home-manager/home.nix
             ./home-manager/linux.nix
@@ -86,7 +82,7 @@
             ./modules/home-modules/java.nix
           ];
           extraSpecialArgs = {
-            unstablepkgs = unstablePkgs;
+            unstablepkgs = unstablenixpkgs.legacyPackages.x86_64-linux;
             nvchad4nix = nvchad4nix;
             nvchad-starter = nvchad-starter;
           };
@@ -94,7 +90,7 @@
 
         # Minimal macOS configuration on MacBookAir
         "crackz@m1air" = home-manager.lib.homeManagerConfiguration {
-          pkgs = darwinPkgs;
+          pkgs = nixpkgs.legacyPackages.aarch64-darwin;
           modules = [
             ./home-manager/home.nix
             ./home-manager/mac.nix
@@ -106,7 +102,7 @@
             ./modules/home-modules/yazi.nix
           ];
           extraSpecialArgs = {
-            unstablepkgs = unstableDarwinPkgs;
+            unstablepkgs = unstablenixpkgs.legacyPackages.aarch64-darwin;
             nvchad4nix = nvchad4nix;
             nvchad-starter = nvchad-starter;
           };
@@ -146,7 +142,6 @@
       # Hydra server configuration
       nixosConfigurations.template-nixos = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        pkgs = pkgs;
         modules = [
           ./modules/container-base.nix
         ];

@@ -40,6 +40,9 @@
       nixosConfigurations.nixbox = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         pkgs = pkgs;
+        config = {
+          allowUnfree = true;
+        };
         modules = [
           lanzaboote.nixosModules.lanzaboote
           ./systems/nixbox/configuration.nix

@@ -139,6 +139,17 @@
         ];
       };
 
+
+      # Hydra server configuration
+      nixosConfigurations.prod-mirror-1 = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./modules/container-base.nix
+          ./modules/packages/core.nix
+          ./system/prod-mirror-1.nix
+        ];
+      };
+
       # Hydra server configuration
       nixosConfigurations.template-nixos = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";

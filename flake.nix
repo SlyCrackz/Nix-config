@@ -146,7 +146,6 @@
         modules = [
           ./modules/container-base.nix
           ./modules/packages/core.nix
-          ./system/prod-mirror-1.nix
         ];
       };
 

@@ -8,6 +8,7 @@
   environment.systemPackages = [
     pkgs.vim
     pkgs.git
+    pkgs.rsync
   ];
 
   # Enable SSH for remote access

@@ -18,6 +18,5 @@
     pkgs.cmatrix
     pkgs.obsidian
     pkgs.veracrypt
-    unstablepkgs.gns3-gui
   ];
 }

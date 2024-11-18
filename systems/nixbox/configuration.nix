@@ -20,6 +20,16 @@
     "L /etc/secureboot - - - - /persist/etc/secureboot"
   ];
 
+  # Needed for nfs
+  services.rpcbind.enable = true;
+
+  # Mount the NFS share
+  fileSystems."/mnt/nfs/Proxmox" = {
+    device = "172.16.10.5:/export/Proxmox";
+    fsType = "nfs";
+    options = [ "nfsvers=3" "rw" "noauto" "x-systemd.automount" "x-systemd.idle-timeout=600" ];
+  };
+
   fileSystems."/var/lib/bluetooth" = {
     device = "/persist/var/lib/bluetooth";
     options = [ "bind" "noauto" "x-systemd.automount" ];

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, unstablepkgs, ... }:
 
 {
   # Define system-wide packages here
